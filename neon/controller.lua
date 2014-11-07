@@ -10,7 +10,8 @@ require("neon.utils")
 
 local M = neon.class("Controller")
 
-function M:ctor()
+function M:ctor(rootView)
+    self.rootView = rootView
     self.view = nil
     self:initGlobalEvents()
 end
@@ -24,8 +25,8 @@ end
 function M:removeLocalEvents()
 end
 
-function M:initView()
-    neon.loge("you must overite this method !",self.TAG)
+function M:createView()
+    neon.loge("createView is empty", self.__cname)
     return nil
 end
 
@@ -43,7 +44,7 @@ end
 
 function M:show()
     if not self.view then 
-        self.view = self:initView()
+        self.view = self:createView()
         self:initLocalEvents()
     else 
         self.view:setVisibile(true)
@@ -53,9 +54,9 @@ end
 
 function M:getView()
     if not self.view then 
-        self.view = self:initView()
+        self.view = self:createView()
         if not self.view then 
-            neon.loge("can not get view ",self.TAG)
+            neon.loge("can not get view ", self.__cname)
         else
 
         end

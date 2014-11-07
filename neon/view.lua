@@ -13,12 +13,9 @@ local M = neon.class("View", function()
     return cc.Layer:create()
 end)
 
-function M:ctor()
-    self:getRoot():addChild(self)
-end
-function M:getRoot()
-    neon.loge("-- you must overite this method !", self.__cname)
-    return nil
+function M:ctor(rootView)
+    self.rootView = rootView
+    self.rootView:addChild(self)
 end
 
 return M
