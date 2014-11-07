@@ -16,13 +16,12 @@ function M:ctor()
 end
 
 function M:initGlobalEvents()
-    neon.loge(" you muse overite this method !",self.__cname)
 end
 
-function M:initModuleEvents()
+function M:initLocalEvents()
 end
 
-function M:removeModuleEvents()
+function M:removeLocalEvents()
 end
 
 function M:initView()
@@ -38,14 +37,14 @@ function M:remove()
     if self.view then
         self.view:removeFromParent(true)
         self.view = nil
-        self:removeModuleEvent()
+        self:removeLocalEvents()
     end
 end
 
 function M:show()
     if not self.view then 
         self.view = self:initView()
-        self:initModuleEvent()
+        self:initLocalEvents()
     else 
         self.view:setVisibile(true)
     end
