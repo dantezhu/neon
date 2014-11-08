@@ -4,8 +4,8 @@ local M = neon.class("Neon")
 
 function M:ctor(scene)
     self.scene = scene
-    -- modules列表
-    self.modules = {}
+    -- controllers列表
+    self.controllers = {}
 end
 
 -- 启动
@@ -17,12 +17,12 @@ function M:run()
     end
 end
 
-function M:register_module(name, controller)
+function M:register_controller(name, controller)
     controller:register_to_app(self, name)
 end
 
-function M:get_module(name)
-    return self.modules[name]
+function M:get_controller(name)
+    return self.controllers[name]
 end
 
 return M

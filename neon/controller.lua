@@ -38,7 +38,7 @@ function M:addAppEvent(name, callback)
     neon.eventDispatcher:add(name, callback)
 end
 
-function M:addModuleEvent(name, callback)
+function M:addSelfEvent(name, callback)
     table.insert(self.moduleEvents, name)
 
     neon.eventDispatcher:add(name, callback)
@@ -51,7 +51,7 @@ function M:clearAppEvents()
     self.appEvents = {}
 end
 
-function M:clearModuleEvents()
+function M:clearSelfEvents()
     for i=1,#self.moduleEvents do
         neon.eventDispatcher:del(self.moduleEvents[i])
     end
@@ -66,7 +66,7 @@ function M:remove()
     if self.view then
         self.view:removeFromParent(true)
         self.view = nil
-        self:clearModuleEvents()
+        self:clearSelfEvents()
     end
 end
 
