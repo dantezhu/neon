@@ -28,10 +28,10 @@ function M:run(name)
     end
 end
 
-function M:registerController(controllerClass)
+function M:registerController(name, controllerClass)
     local controller = controllerClass.new(self)
 
-    self.controllers[controller:getName()] = controller
+    self.controllers[name] = controller
 end
 
 function M:getController(name)

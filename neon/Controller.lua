@@ -27,11 +27,6 @@ function M:createView()
     return nil
 end
 
-function M:getName()
-    -- 继承需要重写
-   return nil
-end
-
 function M:addAppEvent(name, callback)
     table.insert(self.appEvents, name)
 
