@@ -1,6 +1,5 @@
 
 require "Cocos2d"
-require("neon.init")
 
 -- cclog
 local cclog = function(...)
@@ -29,9 +28,11 @@ local function main()
     --create scene 
     local gameScene = cc.Scene:create()
     
-    local app = neon.Neon(gameScene)
+    require("neon.init")
 
-    app.run()
+    local app = neon.Neon.new(gameScene)
+
+    app:run()
 end
 
 
