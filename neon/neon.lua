@@ -20,8 +20,8 @@ function M:run()
     end
 end
 
-function M:register_controller(name, controllerClass, viewClass)
-    local controller = controllerClass.new(self, viewClass)
+function M:register_controller(name, controllerClass)
+    local controller = controllerClass.new(self)
 
     self.controllers[name] = controller
 end

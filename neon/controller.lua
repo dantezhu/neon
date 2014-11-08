@@ -10,7 +10,7 @@ require("neon.utils")
 
 local M = neon.class("Controller")
 
-function M:ctor(app, viewClass)
+function M:ctor(app)
     self.app = app
 
     self.view = nil
@@ -23,8 +23,8 @@ function M:onCreateView()
 end
 
 function M:createView()
-    -- 创建view
-    return self.viewClass(self.app.scene)
+    -- 创建view, 需要覆盖
+    return nil
 end
 
 function M:addAppEvent(name, callback)
