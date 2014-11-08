@@ -16,17 +16,17 @@ function M:ctor()
 end
 
 -- 覆盖
-function M:register(name, callback)
+function M:add(name, callback)
     self._eventTable[name] = callback
 end
 
 -- 删除
-function M:unregister(name)
+function M:del(name)
     self._eventTable[name] = nil
 end
 
 -- 触发
-function M:post(name, params)
+function M:fire(name, params)
     local callback = self._eventTable[name]
     if callback ~= nil then
         return callback(params)
