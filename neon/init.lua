@@ -13,5 +13,6 @@ require("neon.utils")
 neon.Controller = require("neon.controller")
 neon.View = require("neon.view")
 neon.EventDispatcher = require("neon.event_dispatcher")
+neon.Neon = require("neon.neon")
 
 neon.eventDispatcher = neon.EventDispatcher.new()
