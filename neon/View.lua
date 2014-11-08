@@ -16,7 +16,6 @@ end)
 function M:ctor(root)
     self.root = root
     self.root:addChild(self)
-    print('1-----------------------ctor')
 end
 
 return M

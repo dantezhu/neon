@@ -30,8 +30,7 @@ local function main()
     require("neon.init")
 
     local app = neon.Neon.new()
-    local GameController = require("modules.game.GameController")
-    app:registerController("game", GameController)
+    app:registerController("game", require("modules.game.GameController"))
 
     app:run("game")
 end

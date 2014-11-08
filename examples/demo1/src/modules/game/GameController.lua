@@ -11,4 +11,8 @@ function M:getViewClass()
     return require("modules.game.GameView")
 end
 
+function M:onCreateView()
+	
+end
+
 return M
