@@ -13,16 +13,38 @@ local M = neon.class("Controller")
 function M:ctor(rootView)
     self.rootView = rootView
     self.view = nil
-    self:initGlobalEvents()
+    self.appEvents = {}
+    self.moduleEvents = {}
 end
 
-function M:initGlobalEvents()
+function M:onCreateView()
+    -- 当view创建时的回调
 end
 
-function M:initLocalEvents()
+function M:addAppEvent(name, callback)
+    table.insert(self.appEvents, name)
+
+    neon.eventDispatcher:add(name, callback)
 end
 
-function M:removeLocalEvents()
+function M:addModuleEvent(name, callback)
+    table.insert(self.moduleEvents, name)
+
+    neon.eventDispatcher:add(name, callback)
+end
+
+function M:delAppEvents()
+    for i=1,#self.appEvents do
+        neon.eventDispatcher:del(self.appEvents[i])
+    end
+    self.appEvents = {}
+end
+
+function M:delModuleEvents()
+    for i=1,#self.moduleEvents do
+        neon.eventDispatcher:del(self.moduleEvents[i])
+    end
+    self.moduleEvents = {}
 end
 
 function M:createView()
@@ -38,14 +60,14 @@ function M:remove()
     if self.view then
         self.view:removeFromParent(true)
         self.view = nil
-        self:removeLocalEvents()
+        self:delModuleEvents()
     end
 end
 
 function M:show()
     if not self.view then 
         self.view = self:createView()
-        self:initLocalEvents()
+        self:onCreateView()
     else 
         self.view:setVisibile(true)
     end

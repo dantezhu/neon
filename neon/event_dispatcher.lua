@@ -16,12 +16,12 @@ function M:ctor()
 end
 
 -- 覆盖
-function M:on(name, callback)
+function M:add(name, callback)
     self._eventTable[name] = callback
 end
 
 -- 删除
-function M:remove(name)
+function M:del(name)
     self._eventTable[name] = nil
 end
 
