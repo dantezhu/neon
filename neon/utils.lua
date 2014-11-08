@@ -226,6 +226,43 @@ function neon.iskindof(obj, classname)
     return false
 end
 
+
+--[[--
+
+用指定字符或字符串分割输入字符串，返回包含分割结果的数组
+
+~~~ lua
+
+local input = "Hello,World"
+local res = string.split(input, ",")
+-- res = {"Hello", "World"}
+
+local input = "Hello-+-World-+-Quick"
+local res = string.split(input, "-+-")
+-- res = {"Hello", "World", "Quick"}
+
+~~~
+
+@param string input 输入字符串
+@param string delimiter 分割标记字符或字符串
+
+@return array 包含分割结果的数组
+
+]]
+local function split_string(input, delimiter)
+    input = tostring(input)
+    delimiter = tostring(delimiter)
+    if (delimiter=='') then return false end
+    local pos,arr = 0, {}
+    -- for each divider found
+    for st,sp in function() return string.find(input, delimiter, pos, true) end do
+        table.insert(arr, string.sub(input, pos, st - 1))
+        pos = sp + 1
+    end
+    table.insert(arr, string.sub(input, pos))
+    return arr
+end
+
 --[[--
 
 载入一个模块
@@ -320,7 +357,7 @@ function neon.import(moduleName, currentModuleName)
                 currentModuleName = v
             end
 
-            currentModuleNameParts = string.split(currentModuleName, ".")
+            currentModuleNameParts = split_string(currentModuleName, ".")
         end
         table.remove(currentModuleNameParts, #currentModuleNameParts)
     end
@@ -402,4 +439,5 @@ end
 function neon.loge(msg,tag) 
     neon.logger:e(msg,tag) 
 end
+
 

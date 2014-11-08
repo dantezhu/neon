@@ -1,6 +1,6 @@
 
 require("neon.init")
--- local GameView = neon.import(".GameView")
+local GameView = neon.import(".GameView")
 
 
 local M = neon.class("GameController", function (app)
@@ -8,11 +8,10 @@ local M = neon.class("GameController", function (app)
 end)
 
 function M:getViewClass()
-    return require("modules.game.GameView")
+    return GameView
 end
 
 function M:onCreateView()
-	
 end
 
 return M
