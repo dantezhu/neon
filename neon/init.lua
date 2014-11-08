@@ -10,7 +10,7 @@ neon = neon or {}
 
 require("neon.utils")
 
-neon.Controller = require("neon.controller")
-neon.View = require("neon.view")
-neon.EventDispatcher = require("neon.event_dispatcher")
-neon.Neon = require("neon.neon")
+neon.Controller = require("neon.Controller")
+neon.View = require("neon.View")
+neon.EventDispatcher = require("neon.EventDispatcher")
+neon.Neon = require("neon.Neon")
