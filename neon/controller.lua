@@ -10,15 +10,26 @@ require("neon.utils")
 
 local M = neon.class("Controller")
 
-function M:ctor(rootView)
-    self.rootView = rootView
+function M:ctor(viewClass)
+    self.app = nil
     self.view = nil
+
     self.appEvents = {}
     self.moduleEvents = {}
 end
 
 function M:onCreateView()
-    -- 当view创建时的回调
+    -- 当创建view后
+end
+
+function M:createView()
+    -- 创建view
+    return self.viewClass(self.app.scene)
+end
+
+function M:register_to_app(app, name)
+    self.app = app
+    self.modules[name] = controller
 end
 
 function M:addAppEvent(name, callback)
@@ -33,23 +44,18 @@ function M:addModuleEvent(name, callback)
     neon.eventDispatcher:add(name, callback)
 end
 
-function M:delAppEvents()
+function M:clearAppEvents()
     for i=1,#self.appEvents do
         neon.eventDispatcher:del(self.appEvents[i])
     end
     self.appEvents = {}
 end
 
-function M:delModuleEvents()
+function M:clearModuleEvents()
     for i=1,#self.moduleEvents do
         neon.eventDispatcher:del(self.moduleEvents[i])
     end
     self.moduleEvents = {}
-end
-
-function M:createView()
-    neon.loge("createView is empty", self.__cname)
-    return nil
 end
 
 function M:hide()
@@ -60,7 +66,7 @@ function M:remove()
     if self.view then
         self.view:removeFromParent(true)
         self.view = nil
-        self:delModuleEvents()
+        self:clearModuleEvents()
     end
 end
 

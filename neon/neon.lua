@@ -10,15 +10,19 @@ end
 
 -- 启动
 function M:run()
-    local blueprint = self.blueprints[bp_name]
-
-    if blueprint ~= nil then
-        blueprint:show()
+    if cc.Director:getInstance():getRunningScene() then
+        cc.Director:getInstance():replaceScene(self.scene)
+    else
+        cc.Director:getInstance():runWithScene(self.scene)
     end
 end
 
-function register_module(controller)
-    blueprint.register_to_app(self)
+function M:register_module(name, controller)
+    controller:register_to_app(self, name)
+end
+
+function M:get_module(name)
+    return self.modules[name]
 end
 
 return M
