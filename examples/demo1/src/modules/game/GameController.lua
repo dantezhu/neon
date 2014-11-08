@@ -14,4 +14,7 @@ end
 function M:onCreateView()
 end
 
+function M:ctor(app)
+end
+
 return M
