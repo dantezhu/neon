@@ -22,9 +22,14 @@ function M:onCreateView()
     -- 当创建view后
 end
 
-function M:createView()
-    -- 创建view, 需要覆盖
+function M:getViewClass()
+    -- 返回View类，继承重写
     return nil
+end
+
+function M:createView()
+    -- 创建view
+    return self:getViewClass().new(self.app.scene)
 end
 
 function M:addAppEvent(name, callback)
