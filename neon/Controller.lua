@@ -35,25 +35,25 @@ end
 function M:addAppEvent(name, callback)
     table.insert(self.appEvents, name)
 
-    self.app.eventDispatcher:add(name, callback)
+    self.app.eventDispatcher:register(name, callback)
 end
 
 function M:addSelfEvent(name, callback)
     table.insert(self.moduleEvents, name)
 
-    self.app.eventDispatcher:add(name, callback)
+    self.app.eventDispatcher:register(name, callback)
 end
 
 function M:clearAppEvents()
     for i=1,#self.appEvents do
-        self.app.eventDispatcher:del(self.appEvents[i])
+        self.app.eventDispatcher:unregister(self.appEvents[i])
     end
     self.appEvents = {}
 end
 
 function M:clearSelfEvents()
     for i=1,#self.moduleEvents do
-        self.app.eventDispatcher:del(self.moduleEvents[i])
+        self.app.eventDispatcher:unregister(self.moduleEvents[i])
     end
     self.moduleEvents = {}
 end
