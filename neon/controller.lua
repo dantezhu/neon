@@ -10,10 +10,10 @@ require("neon.utils")
 
 local M = neon.class("Controller")
 
-function M:ctor(viewClass)
-    self.app = nil
-    self.view = nil
+function M:ctor(app, viewClass)
+    self.app = app
 
+    self.view = nil
     self.appEvents = {}
     self.moduleEvents = {}
 end
@@ -25,11 +25,6 @@ end
 function M:createView()
     -- 创建view
     return self.viewClass(self.app.scene)
-end
-
-function M:register_to_app(app, name)
-    self.app = app
-    self.modules[name] = controller
 end
 
 function M:addAppEvent(name, callback)
