@@ -19,4 +19,4 @@ neon.Neon = require("neon.Neon")
 neon.events = neon.EventDispatcher.new()
 
 -- 可以直接用全局的app
-neon.app = neon.Neon.new()
+-- neon.app = neon.Neon.new()
