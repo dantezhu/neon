@@ -3,9 +3,8 @@ require("Cocos2d")
 
 local M = neon.class("GameView", neon.View)
 
-function M:ctor(controller)
-    self.super.ctor(self, controller)
-    
+function M:onCreate()
+
     local layer = cc.LayerColor:create(cc.c4b(0,0,255,255))
     self:addChild(layer)
     

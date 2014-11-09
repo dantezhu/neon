@@ -1,21 +1,17 @@
 
 require("neon.init")
-local ViewClass = neon.import(".View")
-
 
 local M = neon.class("GameController", neon.Controller)
 
+M.name = "game"
+M.viewClass = neon.import(".View")
 
-function M:initAppEvents()
-    neon.loge("initAppEvents")
+function M:onCreate()
+    neon.loge("onCreate")
 	self:addAppEvent(EVT.show_game, function (from)
 	   print(from)
 	   self:show()
 	end)
-end
-
-function M:getViewClass()
-    return ViewClass
 end
 
 return M

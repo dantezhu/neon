@@ -15,6 +15,11 @@ end)
 
 function M:ctor(controller)
    self.controller = controller
+   self:onCreate()
+end
+
+function M:onCreate()
+    -- 继承重写
 end
 
 return M

@@ -10,6 +10,10 @@ require("neon.utils")
 
 local M = neon.class("Controller")
 
+-- 继承者必须修改
+M.name = nil
+M.viewClass = nil
+
 function M:ctor(app)
     self.app = app
 
@@ -17,25 +21,21 @@ function M:ctor(app)
     self.appEvents = {}
     self.moduleEvents = {}
     
-    self:initAppEvents()
+    self:onCreate()
 end
 
-function M:initAppEvents()
-    -- 全局事件
+
+function M:onCreate()
+    -- 当创建时
 end
 
-function M:initModuleEvents()
-    -- 本moduel事件
-end
-
-function M:getViewClass()
-    -- 返回View类，继承重写
-    return nil
+function M:onShow()
+    -- 当展示View时
 end
 
 function M:createView()
     -- 创建view
-    return self:getViewClass().new(self)
+    return self.viewClass.new(self)
 end
 
 function M:addAppEvent(name, callback)
@@ -80,7 +80,7 @@ function M:show()
     if not self.view then 
         self.view = self:createView()
         self.app.scene:addChild(self.view)
-        self:initModuleEvents()
+        self:onShow()
     else 
         self.view:setVisibile(true)
     end

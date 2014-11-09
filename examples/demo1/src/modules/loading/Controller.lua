@@ -1,16 +1,12 @@
 
 require("neon.init")
-local ViewClass = neon.import(".View")
-
 
 local M = neon.class("LoadingController", neon.Controller)
 
-function M:getViewClass()
-    return ViewClass
-end
+M.name = "loading"
+M.viewClass = neon.import(".View")
 
-
-function M:initAppEvents()
+function M:onCreate()
     self:addAppEvent(EVT.show_loading, neon.handler(self, self.showSelf))
 end
 
