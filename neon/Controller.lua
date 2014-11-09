@@ -35,31 +35,31 @@ end
 
 function M:createView()
     -- 创建view
-    return self:getViewClass().new(self.app.scene)
+    return self:getViewClass().new(self)
 end
 
 function M:addAppEvent(name, callback)
     table.insert(self.appEvents, name)
 
-    self.app.eventDispatcher:addHandler(name, callback)
+    neon.events:addHandler(name, callback)
 end
 
-function M:addSelfEvent(name, callback)
+function M:addModuleEvent(name, callback)
     table.insert(self.moduleEvents, name)
 
-    self.app.eventDispatcher:addHandler(name, callback)
+    neon.events:addHandler(name, callback)
 end
 
 function M:clearAppEvents()
     for i=1,#self.appEvents do
-        self.app.eventDispatcher:delHandler(self.appEvents[i])
+        neon.events:delHandler(self.appEvents[i])
     end
     self.appEvents = {}
 end
 
-function M:clearSelfEvents()
+function M:clearModuleEvents()
     for i=1,#self.moduleEvents do
-        self.app.eventDispatcher:delHandler(self.moduleEvents[i])
+        neon.events:delHandler(self.moduleEvents[i])
     end
     self.moduleEvents = {}
 end
@@ -72,32 +72,19 @@ function M:remove()
     if self.view then
         self.view:removeFromParent(true)
         self.view = nil
-        self:clearSelfEvents()
+        self:clearModuleEvents()
     end
 end
 
 function M:show()
     if not self.view then 
         self.view = self:createView()
+        self.app.scene:addChild(self.view)
         self:initModuleEvents()
     else 
         self.view:setVisibile(true)
     end
 
 end
-
-function M:getView()
-    if not self.view then 
-        self.view = self:createView()
-        if not self.view then 
-            neon.loge("can not get view ", self.__cname)
-        else
-
-        end
-    end
-
-    return self.view
-end
-
 
 return M

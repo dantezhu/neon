@@ -13,9 +13,8 @@ local M = neon.class("View", function()
     return cc.Layer:create()
 end)
 
-function M:ctor(root)
-    self.root = root
-    self.root:addChild(self)
+function M:ctor(controller)
+   self.controller = controller
 end
 
 return M

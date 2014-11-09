@@ -7,9 +7,6 @@ function M:ctor()
     self.scene = nil
     -- controllers列表
     self.controllers = {}
-
-    local EventDispatcher = require("neon.EventDispatcher")
-    self.eventDispatcher = EventDispatcher.new()
 end
 
 -- 启动

@@ -28,11 +28,13 @@ local function main()
     --create scene
     
     require("neon.init")
+    require("Constants")
 
     local app = neon.Neon.new()
-    app:registerController("game", require("modules.game.GameController"))
+    app:registerController("loading", require("modules.loading.Controller"))
+    app:registerController("game", require("modules.game.Controller"))
 
-    app:run("game")
+    app:run("loading")
 end
 
 

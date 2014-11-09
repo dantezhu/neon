@@ -26,10 +26,10 @@ function M:delHandler(name)
 end
 
 -- 触发
-function M:postEvent(name, params)
+function M:postEvent(name, ...)
     local callback = self._eventTable[name]
     if callback ~= nil then
-        return callback(params)
+        return callback(...)
     else
         return nil
     end

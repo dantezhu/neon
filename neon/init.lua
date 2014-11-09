@@ -14,3 +14,9 @@ neon.Controller = require("neon.Controller")
 neon.View = require("neon.View")
 neon.EventDispatcher = require("neon.EventDispatcher")
 neon.Neon = require("neon.Neon")
+
+-- events是可以跨app的
+neon.events = neon.EventDispatcher.new()
+
+-- 可以直接用全局的app
+neon.app = neon.Neon.new()
