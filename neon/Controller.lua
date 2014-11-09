@@ -30,7 +30,7 @@ function M:onCreateView()
     -- 当创建View时
 end
 
-function M:onRemoveView()
+function M:onDestroyView()
     -- 当删除View时
 end
 
@@ -48,7 +48,7 @@ function M:remove()
         self.view:removeFromParent(true)
         self.view = nil
 
-        self:onRemoveView()
+        self:onDestroyView()
     end
 end
 
