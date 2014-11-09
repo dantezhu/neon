@@ -13,7 +13,7 @@ function M:ctor()
 end
 
 -- 启动
-function M:run(name)
+function M:run(controllerName)
     self.scene = cc.Scene:create()
 
     if cc.Director:getInstance():getRunningScene() then
@@ -22,7 +22,7 @@ function M:run(name)
         cc.Director:getInstance():runWithScene(self.scene)
     end
 
-    local controller = self:getController(name)
+    local controller = self.controllers[controllerName]
     if controller ~= nil then
         controller:show()
     end
@@ -32,10 +32,6 @@ function M:registerController(name, controllerClass)
     local controller = controllerClass.new(self)
 
     self.controllers[name] = controller
-end
-
-function M:getController(name)
-    return self.controllers[name]
 end
 
 return M
