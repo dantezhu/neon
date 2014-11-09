@@ -16,10 +16,16 @@ function M:ctor(app)
     self.view = nil
     self.appEvents = {}
     self.moduleEvents = {}
+    
+    self:initAppEvents()
 end
 
-function M:onCreateView()
-    -- 当创建view后
+function M:initAppEvents()
+    -- 全局事件
+end
+
+function M:initModuleEvents()
+    -- 本moduel事件
 end
 
 function M:getViewClass()
@@ -73,7 +79,7 @@ end
 function M:show()
     if not self.view then 
         self.view = self:createView()
-        self:onCreateView()
+        self:initModuleEvents()
     else 
         self.view:setVisibile(true)
     end
