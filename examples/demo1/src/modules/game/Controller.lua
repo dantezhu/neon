@@ -8,7 +8,7 @@ M.viewClass = neon.import(".View")
 
 function M:onCreate()
     neon.loge("onCreate")
-	self:addAppEvent(EVT.show_game, function (from)
+	neon.events:addHandler(EVT.show_game, function (from)
 	   print(from)
 	   self:show()
 	end)
