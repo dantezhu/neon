@@ -19,7 +19,7 @@ function M:run(controllerName)
         cc.Director:getInstance():runWithScene(self.scene)
     end
 
-    local controller = self.controllers[controllerName]
+    local controller = self:getController(controllerName)
     if controller ~= nil then
         controller:show()
     end
@@ -29,6 +29,10 @@ function M:registerController(controllerClass)
     local controller = controllerClass.new(self)
 
     self.controllers[controller.name] = controller
+end
+
+function M:getController(name)
+	return self.controllers[name]
 end
 
 return M
