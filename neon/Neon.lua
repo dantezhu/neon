@@ -19,16 +19,13 @@ function M:run(moduleName)
         cc.Director:getInstance():runWithScene(self.scene)
     end
     
-    neon.app = self
-    
     self:openModule(moduleName)
 
 end
 
 function M:addModule(controllerClass)
-    local controller = controllerClass.new()
+    local controller = controllerClass.new(self)
     
-    controller.app = self
     self.controllers[controller.name] = controller
 end
 

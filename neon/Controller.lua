@@ -14,7 +14,8 @@ local M = neon.class("Controller")
 M.name = nil
 M.viewClass = nil
 
-function M:ctor()
+function M:ctor(app)
+    self.app = app
     self.view = nil
 
     self:onCreate()
@@ -54,7 +55,7 @@ end
 function M:show()
     if not self.view then 
         self.view = self:createView()
-        neon.app.scene:addChild(self.view)
+        self.app.scene:addChild(self.view)
 
         self:onCreateView()
     else 

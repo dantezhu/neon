@@ -17,6 +17,3 @@ neon.Neon = require("neon.Neon")
 
 -- events是可以跨app的
 neon.events = neon.EventDispatcher.new()
-
--- 全局app
-neon.app = neon.Neon.new()
