@@ -30,11 +30,10 @@ local function main()
     require("neon.init")
     require("Constants")
 
-    local app = neon.Neon.new()
-    app:addModule(require("modules.loading.Controller"))
-    app:addModule(require("modules.game.Controller"))
+    neon.app:addModule(require("modules.loading.Controller"))
+    neon.app:addModule(require("modules.game.Controller"))
 
-    app:run("loading")
+    neon.app:run("loading")
 end
 
 

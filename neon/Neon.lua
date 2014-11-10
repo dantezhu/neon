@@ -19,7 +19,7 @@ function M:run(moduleName)
         cc.Director:getInstance():runWithScene(self.scene)
     end
     
-    neon.currentApp = self
+    neon.app = self
     
     self:openModule(moduleName)
 
