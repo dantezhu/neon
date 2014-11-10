@@ -88,7 +88,7 @@ function M:postEvent(name, ...)
         end
 
         if found then
-            handler.callback(name, ...)
+            handler.callback(...)
         end
     end
 end

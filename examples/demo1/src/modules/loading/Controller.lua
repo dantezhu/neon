@@ -12,8 +12,7 @@ end
 
 function M:onCreateView()
     neon.loge("loading onCreateView")
-    neon.events:addHandler(EVT.test, function (name)
-        
+    neon.events:addHandler(EVT.test, function ()
     end, self)
     
 end
@@ -22,8 +21,8 @@ function M:onDestroyView()
     neon.events:delHandlersForTarget(self)
 end
 
-function M:showSelf(name, from)
-    print(name, from)
+function M:showSelf(from)
+    print(from)
     self:show()
 end
 
