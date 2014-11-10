@@ -33,13 +33,13 @@ function M:addModule(controllerClass)
 end
 
 function M:getModule(name)
-	return self.controllers[name]
+    return self.controllers[name]
 end
 
 function M:openModule(name)
-	if self:getModule(name) ~= nil then
-	   self:getModule(name):show()
-	end
+    if self:getModule(name) ~= nil then
+       self:getModule(name):show()
+    end
 end
 
 function M:closeModule(name)
