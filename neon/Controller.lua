@@ -14,8 +14,8 @@ local M = neon.class("Controller")
 M.name = nil
 M.viewClass = nil
 
-function M:ctor(app)
-    self.app = app
+function M:ctor()
+    self.app = nil
     self.view = nil
 
     self:onCreate()

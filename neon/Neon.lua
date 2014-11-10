@@ -10,7 +10,7 @@ function M:ctor()
 end
 
 -- 启动
-function M:run(controllerName)
+function M:run(moduleName)
     self.scene = cc.Scene:create()
 
     if cc.Director:getInstance():getRunningScene() then
@@ -18,21 +18,40 @@ function M:run(controllerName)
     else
         cc.Director:getInstance():runWithScene(self.scene)
     end
+    
+    neon.currentApp = self
+    
+    self:openModule(moduleName)
 
-    local controller = self:getController(controllerName)
-    if controller ~= nil then
-        controller:show()
-    end
 end
 
-function M:registerController(controllerClass)
-    local controller = controllerClass.new(self)
-
+function M:addModule(controllerClass)
+    local controller = controllerClass.new()
+    
+    controller.app = self
     self.controllers[controller.name] = controller
 end
 
-function M:getController(name)
+function M:getModule(name)
 	return self.controllers[name]
+end
+
+function M:openModule(name)
+	if self:getModule(name) ~= nil then
+	   self:getModule(name):show()
+	end
+end
+
+function M:closeModule(name)
+    if self:getModule(name) ~= nil then
+        self:getModule(name):remove()
+    end
+end
+
+function M:hideModule(name)
+    if self:getModule(name) ~= nil then
+        self:getModule(name):hide()
+    end
 end
 
 return M

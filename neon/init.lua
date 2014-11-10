@@ -20,3 +20,6 @@ neon.events = neon.EventDispatcher.new()
 
 -- 可以直接用全局的app
 -- neon.app = neon.Neon.new()
+
+-- 正在运行的app
+neon.currentApp = nil
