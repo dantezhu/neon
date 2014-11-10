@@ -11,12 +11,14 @@ function M:onCreate()
 end
 
 function M:onCreateView()
+    neon.loge("loading onCreateView")
     neon.events:addHandler(EVT.test, function (name)
         
     end, self)
     
 end
 function M:onDestoryView()
+    neon.loge("loading onDestoryView")
     neon.events:delHandlersForTarget(self)
 end
 

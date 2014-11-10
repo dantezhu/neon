@@ -14,4 +14,17 @@ function M:onCreate()
 	end, self)
 end
 
+function M:onCreateView()
+    neon.loge("game onCreateView")
+    neon.events:addHandler(EVT.test, function (name)
+
+        end, self)
+
+end
+
+function M:onDestoryView()
+    neon.loge("game onDestoryView")
+    neon.events:delHandlersForTarget(self)
+end
+
 return M
