@@ -10,8 +10,12 @@ function M:ctor()
 end
 
 -- 启动
-function M:run(moduleName)
-    self.scene = cc.Scene:create()
+function M:run(moduleName, scene)
+    if scene == nil then
+        self.scene = cc.Scene:create()
+    else
+        self.scene = scene
+    end
 
     if cc.Director:getInstance():getRunningScene() then
         cc.Director:getInstance():replaceScene(self.scene)
