@@ -11,7 +11,7 @@ function M:onCreate()
 	neon.events:addHandler(EVT.show_game, function (name, from)
 	   print(name, from)
 	   self:show()
-	end, self)
+	end, nil)
 end
 
 function M:onCreateView()
@@ -22,8 +22,8 @@ function M:onCreateView()
 
 end
 
-function M:onDestoryView()
-    neon.loge("game onDestoryView")
+function M:onDestroyView()
+    neon.loge("game onDestroyView")
     neon.events:delHandlersForTarget(self)
 end
 

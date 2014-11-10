@@ -7,7 +7,7 @@ M.name = "loading"
 M.viewClass = neon.import(".View")
 
 function M:onCreate()
-    neon.events:addHandler(EVT.show_loading, neon.handler(self, self.showSelf), self)
+    neon.events:addHandler(EVT.show_loading, neon.handler(self, self.showSelf), nil)
 end
 
 function M:onCreateView()
@@ -17,8 +17,8 @@ function M:onCreateView()
     end, self)
     
 end
-function M:onDestoryView()
-    neon.loge("loading onDestoryView")
+function M:onDestroyView()
+    neon.loge("loading onDestroyView")
     neon.events:delHandlersForTarget(self)
 end
 
