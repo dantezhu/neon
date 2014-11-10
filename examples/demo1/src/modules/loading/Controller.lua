@@ -7,11 +7,11 @@ M.name = "loading"
 M.viewClass = neon.import(".View")
 
 function M:onCreate()
-    neon.events:addHandler(EVT.show_loading, neon.handler(self, self.showSelf))
+    neon.events:addHandler(EVT.show_loading, neon.handler(self, self.showSelf), self)
 end
 
-function M:showSelf(from)
-    print(from)
+function M:showSelf(name, from)
+    print(name, from)
     self:show()
 end
 
