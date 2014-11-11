@@ -21,11 +21,7 @@ function M:run(viewName, transFunc)
         self.running = true
     end
 
-    if scene then
-        self.scene = scene
-    else
-        self.scene = cc.Scene:create()
-    end
+    self.scene = cc.Scene:create()
 
     -- 通过scene注册回调
     self.scene:registerScriptHandler(

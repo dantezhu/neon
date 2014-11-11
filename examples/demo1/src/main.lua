@@ -26,7 +26,9 @@ local function main()
     cc.Director:getInstance():getOpenGLView():setDesignResolutionSize(480, 320, 0)
 
     local app = require("GameApp").new()
-    app:run("loading")
+    app:run("loading", function (scene)
+        return cc.TransitionFade:create(2,scene)
+    end)
 
     app = require("GameApp").new()
     app:run("game", function (scene)
