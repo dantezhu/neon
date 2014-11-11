@@ -42,7 +42,7 @@ end
 function M:cleanup()
     neon.events:delHandlersForTarget(self)
     self:removeAllViews()
-    self:viewClasses = {}
+    self.viewClasses = {}
     self.scene = nil
 end
 
