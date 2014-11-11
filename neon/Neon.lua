@@ -21,16 +21,36 @@ function M:run(viewName, transFunc)
         self.running = true
     end
 
-    -- 万一要支持切换动画，还可以做呢
     if scene then
         self.scene = scene
     else
         self.scene = cc.Scene:create()
     end
 
+    -- 通过scene注册回调
     self.scene:registerScriptHandler(
         function (event_type)
-            if (event_type == "cleanup") then
+            if (event_type == "enter") then
+                if self.onEnter then
+                    self:onEnter()
+                end
+            elseif (event_type == "enterTransitionFinish") then
+                if self.onEnterTransitionFinish then
+                    self:onEnterTransitionFinish()
+                end
+            elseif (event_type == "exitTransitionStart") then
+                if self.onExitTransitionStart then
+                    self:onExitTransitionStart()
+                end
+            elseif (event_type == "exit") then
+                if self.onExit then
+                    self:onExit()
+                end
+            elseif (event_type == "cleanup") then
+                if self.onCleanup then
+                    self:onCleanup()
+                end
+
                 self:cleanup()
             end
         end)
