@@ -15,6 +15,35 @@ function __G__TRACKBACK__(msg)
     return msg
 end
 
+local function appRun1()
+    local app = require("GameApp").new()
+    app:run("loading")
+
+    app = require("GameApp").new()
+    app:run("game", function (scene)
+        return cc.TransitionFade:create(1,scene)
+    end)
+end
+
+poped = false
+
+local function appRun2()
+    local app = require("GameApp").new()
+    app:run("loading")
+
+    app = require("GameApp").new()
+    app:run("game", function (scene)
+        return cc.TransitionFade:create(1,scene)
+    end, true)
+    
+    cc.Director:getInstance():getScheduler():scheduleScriptFunc(function() 
+        if not poped then
+            poped = true   
+            cc.Director:getInstance():popScene()
+         end
+    end,2,false)
+end
+
 local function main()
     collectgarbage("collect")
     -- avoid memory leak
@@ -25,15 +54,9 @@ local function main()
     cc.FileUtils:getInstance():addSearchPath("res")
     cc.Director:getInstance():getOpenGLView():setDesignResolutionSize(480, 320, 0)
 
-    local app = require("GameApp").new()
-    app:run("loading", function (scene)
-        return cc.TransitionFade:create(2,scene)
-    end)
-
-    app = require("GameApp").new()
-    app:run("game", function (scene)
-        return cc.TransitionFade:create(2,scene)
-    end)
+    -- 无论是push还是pop还是replace，只要带上trans，连续调用两个刚才的函数，就会导致cleanup之类的函数执行不到。
+    appRun1()
+    -- appRun2()
 end
 
 
