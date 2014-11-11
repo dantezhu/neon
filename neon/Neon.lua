@@ -4,6 +4,7 @@ require "Cocos2d"
 local M = neon.class("Neon")
 
 function M:ctor()
+    self.running = false
     self.scene = nil
     -- view类列表
     self.viewClasses = {}
@@ -14,27 +15,28 @@ end
 -- 启动
 function M:run(viewName)
     -- 启动过一次就不启动了
-    if self.scene then
+    if self.running then
         return
+    else
+        self.running = true
     end
 
     self.scene = cc.Scene:create()
-    self.scene.neonApp = self
 
-    local runningScene = cc.Director:getInstance():getRunningScene()
+    if neon.runningApp then
+        -- 将之前的那个清空掉
+        neon.runningApp:cleanup()
+        neon.runningApp = nil
+    end
 
-    if runningScene then
-        -- 将之前的那个stop掉
-        if runningScene.neonApp then
-            runningScene.neonApp:cleanup()
-            runningScene.neonApp = nil
-        end
+    neon.runningApp = self
 
+    if cc.Director:getInstance():getRunningScene() then
         cc.Director:getInstance():replaceScene(self.scene)
     else
         cc.Director:getInstance():runWithScene(self.scene)
     end
-    
+
     self:showView(viewName)
 end
 
