@@ -40,7 +40,7 @@ function M:createView()
 end
 
 function M:hide()
-    self.view:setVisibile(false)
+    self.view:setVisible(false)
 end
 
 function M:remove()
@@ -60,7 +60,7 @@ function M:show()
 
         self:onCreateView()
     else 
-        self.view:setVisibile(true)
+        self.view:setVisible(true)
     end
 end
 
