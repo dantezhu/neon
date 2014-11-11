@@ -13,8 +13,8 @@ function M:onCreate()
     local listener = cc.EventListenerTouchOneByOne:create()
 
     listener:registerScriptHandler(function (touch, event)
-            self.app:removeView(self.name)
             neon.events:postEvent(EVT.test)
+            self.app:removeView(self.name)
             neon.events:postEvent(EVT.show_game, self.name)
     end, cc.Handler.EVENT_TOUCH_BEGAN)
 

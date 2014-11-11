@@ -21,15 +21,14 @@ function M:run(viewName)
         self.running = true
     end
 
-    self.scene = cc.Scene:create()
-
     if neon.runningApp then
         -- 将之前的那个清空掉
         neon.runningApp:cleanup()
         neon.runningApp = nil
     end
-
     neon.runningApp = self
+
+    self.scene = cc.Scene:create()
 
     if cc.Director:getInstance():getRunningScene() then
         cc.Director:getInstance():replaceScene(self.scene)
