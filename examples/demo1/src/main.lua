@@ -25,10 +25,14 @@ local function main()
     cc.FileUtils:getInstance():addSearchPath("res")
     cc.Director:getInstance():getOpenGLView():setDesignResolutionSize(480, 320, 0)
 
-    local app = require("GameApp").new()
-
-    app:run("loading")
+    -- require("GameApp")
+    --
+    -- local tmpapp = neon.Neon.new()
+    -- tmpapp:run()
     
+    local app = require("GameApp").new()
+    app:run("loading")
+
 end
 
 
