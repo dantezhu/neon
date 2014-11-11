@@ -14,7 +14,7 @@ end
 -- 启动
 function M:run(viewName)
     -- 启动过一次就不启动了
-    if self.scene ~= nil then
+    if self.scene then
         return
     end
 
@@ -25,7 +25,7 @@ function M:run(viewName)
 
     if runningScene then
         -- 将之前的那个stop掉
-        if runningScene.neonApp ~= nil then
+        if runningScene.neonApp then
             runningScene.neonApp:cleanup()
             runningScene.neonApp = nil
         end
@@ -51,7 +51,7 @@ function M:registerView(viewClass)
 end
 
 function M:createView(name)
-    if self.viewClasses[name] ~= nil then
+    if self.viewClasses[name] then
         return self.viewClasses[name].new(self)
     else
         return nil
@@ -64,9 +64,9 @@ end
 
 function M:showView(name)
     local view = self:getView(name)
-    if view == nil then
+    if not view then
         view = self:createView(name)
-        if view ~= nil then
+        if view then
             self.views[name] = view
 
             self.scene:addChild(view)
@@ -74,7 +74,7 @@ function M:showView(name)
         end
     end
 
-    if not view:isVisible() then
+    if view and not view:isVisible() then
         view:setVisible(true)
         -- 只有在从hide->show时调用
         view:onShow()
@@ -84,7 +84,7 @@ end
 function M:removeView(name)
     local view = self:getView(name)
 
-    if view ~= nil then
+    if view then
         view:onRemove()
         view:removeFromApp()
 
@@ -101,7 +101,7 @@ end
 function M:hideView(name)
     local view = self:getView(name)
 
-    if view ~= nil then
+    if view then
         view:setVisible(false)
 
         view:onHide()
