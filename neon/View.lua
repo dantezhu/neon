@@ -20,6 +20,12 @@ function M:ctor(app)
    self.app = app
 end
 
+function M:removeFromApp()
+    neon.events:delHandlersForTarget(self)
+
+    self:removeFromParent(true)
+end
+
 function M:onCreate()
     -- 继承重写
 end

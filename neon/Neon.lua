@@ -12,20 +12,37 @@ function M:ctor()
 end
 
 -- 启动
-function M:run(viewName, scene)
-    if scene == nil then
-        self.scene = cc.Scene:create()
-    else
-        self.scene = scene
+function M:run(viewName)
+    -- 启动过一次就不启动了
+    if self.scene ~= nil then
+        return
     end
 
-    if cc.Director:getInstance():getRunningScene() then
+    self.scene = cc.Scene:create()
+    self.scene.neonApp = self
+
+    local runningScene = cc.Director:getInstance():getRunningScene()
+
+    if runningScene then
+        -- 将之前的那个stop掉
+        if runningScene.neonApp ~= nil then
+            runningScene.neonApp:cleanup()
+            runningScene.neonApp = nil
+        end
+
         cc.Director:getInstance():replaceScene(self.scene)
     else
         cc.Director:getInstance():runWithScene(self.scene)
     end
     
     self:showView(viewName)
+end
+
+-- 清空
+function M:cleanup()
+    neon.events:delHandlersForTarget(self)
+    self:removeAllViews()
+    self.scene = nil
 end
 
 function M:registerView(viewClass)
@@ -68,9 +85,15 @@ function M:removeView(name)
 
     if view ~= nil then
         view:onRemove()
-        view:removeFromParent(true)
+        view:removeFromApp()
 
         self.views[name] = nil
+    end
+end
+
+function M:removeAllViews()
+    for name,view in pairs(self.views) do
+        self:removeView(name)
     end
 end
 
