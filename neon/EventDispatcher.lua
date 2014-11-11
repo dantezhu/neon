@@ -77,11 +77,11 @@ function M:postEvent(name, ...)
         table.insert(handlers, handler)
     end
 
-    for _,handler in pairs(handlers) do
+    for key,handler in pairs(handlers) do
         local found = false
         if self._eventTable[name] ~= nil then
-            for key,val in pairs(self._eventTable[name]) do
-                if val == handler then
+            for tmpkey,tmpval in pairs(self._eventTable[name]) do
+                if tmpval == handler then
                     found = true
                 end
             end
