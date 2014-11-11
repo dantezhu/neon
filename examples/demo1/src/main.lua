@@ -15,14 +15,6 @@ function __G__TRACKBACK__(msg)
     return msg
 end
 
-local function createApp()
-    local app = neon.Neon.new()
-    app:addModule(require("modules.loading.Controller"))
-    app:addModule(require("modules.game.Controller"))
-
-    return app
-end
-
 local function main()
     collectgarbage("collect")
     -- avoid memory leak
@@ -32,13 +24,11 @@ local function main()
     cc.FileUtils:getInstance():addSearchPath("src")
     cc.FileUtils:getInstance():addSearchPath("res")
     cc.Director:getInstance():getOpenGLView():setDesignResolutionSize(480, 320, 0)
-    
-    require("neon.init")
-    require("Constants")
 
-    -- 直接就是全局的了
-    gapp = createApp()
-    gapp:run("loading")
+    local app = require("GameApp").new()
+
+    app:run("loading")
+    
 end
 
 

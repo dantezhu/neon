@@ -13,16 +13,26 @@ local M = neon.class("View", function()
     return cc.Layer:create()
 end)
 
-function M:ctor(controller)
-   self.controller = controller
-   self:onCreate()
+-- 继承者必须修改
+M.name = nil
+
+function M:ctor(app)
+   self.app = app
 end
 
 function M:onCreate()
     -- 继承重写
 end
 
-function M:onDestroy()
+function M:onRemove()
+    -- 继承重写
+end
+
+function M:onShow()
+    -- 继承重写
+end
+
+function M:onHide()
     -- 继承重写
 end
 

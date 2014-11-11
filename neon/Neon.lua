@@ -5,12 +5,14 @@ local M = neon.class("Neon")
 
 function M:ctor()
     self.scene = nil
-    -- controllers列表
-    self.controllers = {}
+    -- view类列表
+    self.viewClasses = {}
+    -- views列表
+    self.views = {}
 end
 
 -- 启动
-function M:run(moduleName, scene)
+function M:run(viewName, scene)
     if scene == nil then
         self.scene = cc.Scene:create()
     else
@@ -23,35 +25,62 @@ function M:run(moduleName, scene)
         cc.Director:getInstance():runWithScene(self.scene)
     end
     
-    self:openModule(moduleName)
-
+    self:showView(viewName)
 end
 
-function M:addModule(controllerClass)
-    local controller = controllerClass.new(self)
-    
-    self.controllers[controller.name] = controller
+function M:registerView(viewClass)
+    self.viewClasses[viewClass.name] = viewClass
 end
 
-function M:getModule(name)
-    return self.controllers[name]
-end
-
-function M:openModule(name)
-    if self:getModule(name) ~= nil then
-       self:getModule(name):show()
+function M:createView(name)
+    if self.viewClasses[name] ~= nil then
+        return self.viewClasses[name].new(self)
+    else
+        return nil
     end
 end
 
-function M:closeModule(name)
-    if self:getModule(name) ~= nil then
-        self:getModule(name):remove()
+function M:getView(name)
+    return self.views[name]
+end
+
+function M:showView(name)
+    local view = self:getView(name)
+    if view == nil then
+        view = self:createView(name)
+        if view ~= nil then
+            self.views[name] = view
+
+            self.scene:addChild(view)
+            view:onCreate()
+        end
+    end
+
+    if not view:isVisible() then
+        view:setVisible(true)
+        -- 只有在从hide->show时调用
+        view:onShow()
     end
 end
 
-function M:hideModule(name)
-    if self:getModule(name) ~= nil then
-        self:getModule(name):hide()
+function M:removeView(name)
+    local view = self:getView(name)
+
+    if view ~= nil then
+        view:onRemove()
+        view:removeFromParent(true)
+
+        self.views[name] = nil
+    end
+end
+
+function M:hideView(name)
+    local view = self:getView(name)
+
+    if view ~= nil then
+        view:setVisible(false)
+
+        view:onHide()
     end
 end
 
