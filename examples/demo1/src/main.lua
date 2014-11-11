@@ -28,8 +28,10 @@ local function main()
     local app = require("GameApp").new()
     app:run("loading")
 
-    -- app = require("GameApp").new()
-    -- app:run("game")
+    app = require("GameApp").new()
+    app:run("game", function (scene)
+        return cc.TransitionFade:create(2,scene)
+    end)
 end
 
 

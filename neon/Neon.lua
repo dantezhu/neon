@@ -13,7 +13,7 @@ function M:ctor()
 end
 
 -- 启动
-function M:run(viewName, scene)
+function M:run(viewName, transFunc)
     -- 启动过一次就不启动了
     if self.running then
         return
@@ -35,10 +35,15 @@ function M:run(viewName, scene)
             end
         end)
 
+    local transition = self.scene
+    if transFunc then
+        transition = transFunc(self.scene)
+    end
+
     if cc.Director:getInstance():getRunningScene() then
-        cc.Director:getInstance():replaceScene(self.scene)
+        cc.Director:getInstance():replaceScene(transition)
     else
-        cc.Director:getInstance():runWithScene(self.scene)
+        cc.Director:getInstance():runWithScene(transition)
     end
 
     self:showView(viewName)
