@@ -47,6 +47,7 @@ function M:remove()
     if self.view then
         self:onDestroyView()
         
+        self.view:onDestroy()
         self.view:removeFromParent(true)
         self.view = nil
     end

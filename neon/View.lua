@@ -22,4 +22,8 @@ function M:onCreate()
     -- 继承重写
 end
 
+function M:onDestroy()
+    -- 继承重写
+end
+
 return M
