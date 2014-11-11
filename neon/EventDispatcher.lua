@@ -24,7 +24,7 @@ function M:addHandler(name, callback, target)
     local found = false
 
     for idx,val in ipairs(self._eventTable[name]) do
-        if val.callback == callback then
+        if val.callback == callback and val.target == target then
             found = true
         end
     end

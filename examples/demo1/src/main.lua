@@ -33,6 +33,8 @@ local function main()
     local app = require("GameApp").new()
     app:run("loading")
 
+    app = require("GameApp").new()
+    app:run("loading")
 end
 
 
