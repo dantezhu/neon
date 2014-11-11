@@ -13,7 +13,8 @@ function M:ctor()
 end
 
 -- 启动
-function M:run(viewName, transFunc, pushScene)
+-- 不允许指定viewName，是因为希望继承者自己在onEnter中实现
+function M:run(transFunc, pushScene)
     -- 启动过一次就不启动了
     if self.running then
         return
@@ -65,8 +66,6 @@ function M:run(viewName, transFunc, pushScene)
     else
         cc.Director:getInstance():runWithScene(transition)
     end
-
-    self:showView(viewName)
 end
 
 -- 清空
