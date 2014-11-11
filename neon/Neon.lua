@@ -13,7 +13,7 @@ function M:ctor()
 end
 
 -- 启动
-function M:run(viewName)
+function M:run(viewName, scene)
     -- 启动过一次就不启动了
     if self.running then
         return
@@ -21,14 +21,19 @@ function M:run(viewName)
         self.running = true
     end
 
-    if neon.runningApp then
-        -- 将之前的那个清空掉
-        neon.runningApp:cleanup()
-        neon.runningApp = nil
+    -- 万一要支持切换动画，还可以做呢
+    if scene then
+        self.scene = scene
+    else
+        self.scene = cc.Scene:create()
     end
-    neon.runningApp = self
 
-    self.scene = cc.Scene:create()
+    self.scene:registerScriptHandler(
+        function (event_type)
+            if (event_type == "cleanup") then
+                self:cleanup()
+            end
+        end)
 
     if cc.Director:getInstance():getRunningScene() then
         cc.Director:getInstance():replaceScene(self.scene)
