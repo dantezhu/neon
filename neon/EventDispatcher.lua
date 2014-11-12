@@ -15,7 +15,7 @@ function M:ctor()
     self._eventTable = {}
 end
 
--- 覆盖
+-- 添加
 function M:addHandler(name, callback, target)
     if self._eventTable[name] == nil then
         self._eventTable[name] = {}
