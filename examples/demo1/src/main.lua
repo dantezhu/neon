@@ -59,8 +59,8 @@ local function main()
     cc.Director:getInstance():getOpenGLView():setDesignResolutionSize(480, 320, 0)
 
     -- 无论是push还是pop还是replace，只要带上trans，连续调用两个刚才的函数，就会导致cleanup之类的函数执行不到。
-    -- appRun1()
-    appRun2()
+    appRun1()
+    -- appRun2()
 end
 
 

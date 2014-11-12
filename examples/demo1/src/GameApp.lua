@@ -8,6 +8,8 @@ function M:ctor()
     -- 基类
     self.super.ctor(self)
 
+    neon.logger:setLevel(neon.Log.WARN)
+
     self:registerView(require("views.Game"))
     self:registerView(require("views.Loading"))
 
