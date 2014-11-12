@@ -1,7 +1,3 @@
--- log比较特殊，在最前面加载
-neon.Log = require("neon.Log")
-neon.logger = neon.Log.new()
-
 --
 -- Created by IntelliJ IDEA.
 -- User: dantezhu
@@ -424,6 +420,9 @@ function neon.handler(obj, method)
 end
 
 -- log相关
+neon.Log = require("neon.Log")
+neon.logger = neon.Log.new()
+
 function neon.logd(msg,tag) 
     neon.logger:d(msg,tag) 
 end
@@ -439,5 +438,3 @@ end
 function neon.loge(msg,tag) 
     neon.logger:e(msg,tag) 
 end
-
-
