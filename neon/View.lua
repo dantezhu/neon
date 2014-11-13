@@ -8,6 +8,7 @@
 
 
 require("neon.utils")
+require "Cocos2d"
 
 local M = neon.class("View")
 
