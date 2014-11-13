@@ -10,6 +10,27 @@ function M:ctor()
     self.viewClasses = {}
     -- views列表
     self.views = {}
+
+    self:onCreate()
+end
+
+function M:onCreate()
+    -- 继承
+end
+function M:onEnter()
+    -- 继承
+end
+function M:onEnterTransitionFinish()
+    -- 继承
+end
+function M:onExitTransitionStart()
+    -- 继承
+end
+function M:onExit()
+    -- 继承
+end
+function M:onCleanup()
+    -- 继承
 end
 
 -- 启动
@@ -28,27 +49,17 @@ function M:run(transFunc, pushScene)
     self.scene:registerScriptHandler(
         function (event_type)
             if (event_type == "enter") then
-                if self.onEnter then
-                    self:onEnter()
-                end
+                self:onEnter()
             elseif (event_type == "enterTransitionFinish") then
-                if self.onEnterTransitionFinish then
-                    self:onEnterTransitionFinish()
-                end
+                self:onEnterTransitionFinish()
             elseif (event_type == "exitTransitionStart") then
-                if self.onExitTransitionStart then
-                    self:onExitTransitionStart()
-                end
+                self:onExitTransitionStart()
             elseif (event_type == "exit") then
-                if self.onExit then
-                    self:onExit()
-                end
+                self:onExit()
             elseif (event_type == "cleanup") then
-                if self.onCleanup then
-                    self:onCleanup()
-                end
-
                 self:cleanup()
+
+                self:onCleanup()
             end
         end)
 
@@ -98,26 +109,17 @@ function M:showView(name)
         view = self:createView(name)
         if view then
             self.views[name] = view
-
-            self.scene:addChild(view)
-            view:onCreate()
         end
     end
 
-    if view and not view:isVisible() then
-        view:setVisible(true)
-        -- 只有在从hide->show时调用
-        view:onShow()
-    end
+    view:show()
 end
 
 function M:removeView(name)
     local view = self:getView(name)
 
     if view then
-        view:onRemove()
-        view:removeFromApp()
-
+        view:remove()
         self.views[name] = nil
     end
 end
@@ -132,9 +134,7 @@ function M:hideView(name)
     local view = self:getView(name)
 
     if view then
-        view:setVisible(false)
-
-        view:onHide()
+        view:hide()
     end
 end
 

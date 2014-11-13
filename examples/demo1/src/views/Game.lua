@@ -8,7 +8,7 @@ M.name = "game"
 function M:onCreate()
 
     local layer = cc.LayerColor:create(cc.c4b(0,0,255,255))
-    self:addChild(layer)
+    self.root:addChild(layer)
     
     local listener = cc.EventListenerTouchOneByOne:create()
 

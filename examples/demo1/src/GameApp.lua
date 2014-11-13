@@ -4,10 +4,7 @@ require("Constants")
 
 local M = neon.class("GameApp", neon.Neon)
 
-function M:ctor()
-    -- 基类
-    self.super.ctor(self)
-
+function M:onCreate()
     neon.logger:setLevel(neon.Log.WARN)
 
     self:registerView(require("views.Game"))

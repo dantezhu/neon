@@ -9,21 +9,19 @@
 
 require("neon.utils")
 
-local M = neon.class("View", function()
-    return cc.Layer:create()
-end)
+local M = neon.class("View")
 
 -- 继承者必须修改
 M.name = nil
 
 function M:ctor(app)
    self.app = app
-end
 
-function M:removeFromApp()
-    neon.events:delHandlersForTarget(self)
+   -- 节点
+   self.root = self:createRoot()
+   self.app.scene:addChild(self.root)
 
-    self:removeFromParent(true)
+   self:onCreate()
 end
 
 function M:onCreate()
@@ -40,6 +38,40 @@ end
 
 function M:onHide()
     -- 继承重写
+end
+
+function M:createRoot()
+    -- 可以继承重写
+    return cc.Layer:create()   
+end
+
+function M:remove()
+    neon.events:delHandlersForTarget(self)
+
+    if self.root then
+        self.root:removeFromParent(true)
+        self.root = nil
+
+        self:onRemove()
+    end
+end
+
+function M:isVisible()
+    return self.root ~= nil and self.root:isVisible()
+end
+
+function M:show()
+    if self.root and not self.root:isVisible() then
+        self.root:setVisible(true)
+        self:onShow()
+    end
+end
+
+function M:hide()
+    if self.root and self.root:isVisible() then
+        self.root:setVisible(false)
+        self:onHide()
+    end
 end
 
 return M
