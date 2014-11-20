@@ -57,7 +57,10 @@ function M:remove()
 
     -- 放在最后，免得中途又注册
     neon.events:delHandlersForTarget(self)
-    self.app.views[self.name] = nil
+    -- 防止删错
+    if self.app.views[self.name] == self then
+        self.app.views[self.name] = nil
+    end
 end
 
 function M:isVisible()
