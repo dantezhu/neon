@@ -57,9 +57,9 @@ function M:run(transFunc, pushScene)
             elseif (event_type == "exit") then
                 self:onExit()
             elseif (event_type == "cleanup") then
-                self:cleanup()
-
                 self:onCleanup()
+
+                self:cleanup()
             end
         end)
 
@@ -81,10 +81,10 @@ end
 
 -- 清空
 function M:cleanup()
-    neon.events:delHandlersForTarget(self)
     self:removeAllViews()
     self.viewClasses = {}
     self.scene = nil
+    neon.events:delHandlersForTarget(self)
 end
 
 function M:registerView(viewClass)

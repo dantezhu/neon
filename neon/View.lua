@@ -47,15 +47,16 @@ function M:createRoot()
 end
 
 function M:remove()
-    neon.events:delHandlersForTarget(self)
-
     if self.root then
+        -- 放在前面
+        self:onRemove()
+
         self.root:removeFromParent(true)
         self.root = nil
-
-        self:onRemove()
     end
 
+    -- 放在最后，免得中途又注册
+    neon.events:delHandlersForTarget(self)
     self.app.views[self.name] = nil
 end
 
