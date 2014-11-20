@@ -119,8 +119,8 @@ function M:removeView(name)
     local view = self:getView(name)
 
     if view then
+        -- 会自动从app中删掉，其作用在于view自己调用remove也可以用
         view:remove()
-        self.views[name] = nil
     end
 end
 

@@ -55,6 +55,8 @@ function M:remove()
 
         self:onRemove()
     end
+
+    self.app.views[self.name] = nil
 end
 
 function M:isVisible()
