@@ -41,7 +41,7 @@ end
 
 
 function M:setLevel(level)
-    if level < self.DEBUG and level > self.ERROR then 
+    if level < self.DEBUG or level > self.ERROR then 
        self:e("error on setLevel ---" ,"M")
        return
     end
