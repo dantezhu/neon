@@ -33,11 +33,7 @@ function M:onRemove()
     -- 继承重写
 end
 
-function M:onShow()
-    -- 继承重写
-end
-
-function M:onHide()
+function M:onVisibleChange(visible)
     -- 继承重写
 end
 
@@ -70,14 +66,14 @@ end
 function M:show()
     if self.root and not self.root:isVisible() then
         self.root:setVisible(true)
-        self:onShow()
+        self:onVisibleChange(true)
     end
 end
 
 function M:hide()
     if self.root and self.root:isVisible() then
         self.root:setVisible(false)
-        self:onHide()
+        self:onVisibleChange(false)
     end
 end
 
