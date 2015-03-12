@@ -87,7 +87,7 @@ function M:cleanup()
 end
 
 function M:registerView(viewClass)
-    self.viewClasses[viewClass.name] = viewClass
+    self.viewClasses[viewClass.__cname] = viewClass
 end
 
 function M:createView(name)

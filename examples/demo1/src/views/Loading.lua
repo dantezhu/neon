@@ -1,6 +1,4 @@
-local M = neon.class("GameView", neon.View)
-
-M.name = "loading"
+local M = neon.class("LoadingView", neon.View)
 
 function M:onCreate()
 
@@ -11,8 +9,8 @@ function M:onCreate()
 
     listener:registerScriptHandler(function (touch, event)
             neon.events:postEvent(EVT.test)
-            self.app:removeView(self.name)
-            neon.events:postEvent(EVT.show_game, self.name)
+            self.app:removeView(self.__cname)
+            neon.events:postEvent(EVT.show_game, self.__cname)
     end, cc.Handler.EVENT_TOUCH_BEGAN)
 
     layer:getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, layer)
@@ -23,7 +21,7 @@ function M:onCreate()
 end
 
 function M:onRemove()
-    neon.loge("onRemove " .. self.name)
+    neon.loge("onRemove " .. self.__cname)
     neon.events:delHandlersForTarget(self)
 end
 

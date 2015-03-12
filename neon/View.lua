@@ -11,9 +11,6 @@ require("neon.utils")
 
 local M = neon.class("View")
 
--- 继承者必须修改
-M.name = nil
-
 function M:ctor(app)
    self.app = app
 
@@ -53,8 +50,8 @@ function M:remove()
     -- 放在最后，免得中途又注册
     neon.events:delHandlersForTarget(self)
     -- 防止删错
-    if self.app.views[self.name] == self then
-        self.app.views[self.name] = nil
+    if self.app.views[self.__cname] == self then
+        self.app.views[self.__cname] = nil
     end
 end
 
