@@ -1,4 +1,3 @@
-
 require "cocos.init"
 
 -- cclog

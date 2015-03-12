@@ -1,6 +1,3 @@
-require("neon.init")
-require("cocos.init")
-
 local M = neon.class("GameView", neon.View)
 
 M.name = "game"
