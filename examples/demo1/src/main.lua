@@ -1,16 +1,17 @@
-require "cocos.init"
+cc.FileUtils:getInstance():setPopupNotify(false)
+cc.FileUtils:getInstance():addSearchPath("src")
+cc.FileUtils:getInstance():addSearchPath("res")
 
--- cclog
-local cclog = function(...)
-    print(string.format(...))
-end
+
+require "cocos.init"
+require "neon.init"
 
 -- for CCLuaEngine traceback
 function __G__TRACKBACK__(msg)
-    cclog("----------------------------------------")
-    cclog("LUA ERROR: " .. tostring(msg) .. "\n")
-    cclog(debug.traceback())
-    cclog("----------------------------------------")
+    neon.loge("----------------------------------------")
+    neon.loge("LUA ERROR: " .. tostring(msg) .. "\n")
+    neon.loge(debug.traceback())
+    neon.loge("----------------------------------------")
     return msg
 end
 
@@ -53,8 +54,6 @@ local function main()
     collectgarbage("setpause", 100)
     collectgarbage("setstepmul", 5000)
     
-    cc.FileUtils:getInstance():addSearchPath("src")
-    cc.FileUtils:getInstance():addSearchPath("res")
     cc.Director:getInstance():getOpenGLView():setDesignResolutionSize(480, 320, cc.ResolutionPolicy.SHOW_ALL)
 
     -- 无论是push还是pop还是replace，只要带上trans，连续调用两个刚才的函数，就会导致cleanup之类的函数执行不到。

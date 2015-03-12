@@ -1,4 +1,3 @@
-require("neon.init")
 require("Constants")
 
 
