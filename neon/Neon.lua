@@ -1,5 +1,5 @@
 require("neon.utils")
-require "Cocos2d"
+require "cocos.init"
 
 local M = neon.class("Neon")
 
