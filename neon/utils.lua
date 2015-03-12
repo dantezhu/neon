@@ -427,12 +427,12 @@ function neon.logd(msg,tag)
     neon.logger:d(msg,tag) 
 end
 
-function neon.logw(msg,tag) 
-    neon.logger:w(msg,tag) 
-end
-
 function neon.logi(msg,tag) 
     neon.logger:i(msg,tag) 
+end
+
+function neon.logw(msg,tag) 
+    neon.logger:w(msg,tag) 
 end
 
 function neon.loge(msg,tag) 
