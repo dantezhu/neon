@@ -611,6 +611,10 @@ cc.LightFlag =
     LIGHT15 = math.pow(2,15),
 }
 
+-- add by dantezhu begin
+cc.AsyncTaskPool = {}
+-- add end
+
 cc.AsyncTaskPool.TaskType =
 {
     TASK_IO = 0,
