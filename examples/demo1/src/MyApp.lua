@@ -1,12 +1,12 @@
 require("Constants")
 
 
-local M = neon.class("GameApp", neon.Neon)
+local M = neon.class("MyApp", neon.Neon)
 
 function M:onCreate()
     neon.logger:setLevel(neon.Log.WARN)
 
-    self:registerView(require("views.GameView"))
+    self:registerView(require("views.MainView"))
     self:registerView(require("views.LoadingView"))
 
     -- 只是演示，不一定要用事件来开启view，也可以直接调用
@@ -15,7 +15,7 @@ function M:onCreate()
     end, self)
 
     neon.events:addHandler(EVT.show_game, function (from)
-        self:showView("GameView")
+        self:showView("MainView")
     end, self)
 end
 

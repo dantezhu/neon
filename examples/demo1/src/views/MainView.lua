@@ -1,4 +1,4 @@
-local M = neon.class("GameView", neon.View)
+local M = neon.class("MainView", neon.View)
 
 function M:onCreate()
 
