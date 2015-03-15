@@ -1,6 +1,7 @@
 local M = neon.class("MainView", neon.View)
 
 function M:onCreate()
+    neon.loge("onCreate %s", self.__cname)
 
     local layer = cc.LayerColor:create(cc.c4b(0,0,255,255))
     self.root:addChild(layer)
@@ -16,7 +17,7 @@ function M:onCreate()
 end
 
 function M:onRemove()
-    neon.loge("onRemove " .. self.__cname)
+    neon.loge("onRemove %s", self.__cname)
 end
 
 return M

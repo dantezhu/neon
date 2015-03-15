@@ -7,38 +7,34 @@ M.ERROR = 4;
 
 M._level = M.DEBUG;
 
-function M:ctor(args) 
-
-end
-
-function M:d(msg,tag)
-    tag = tag or "unkown"
-    msg = msg or "unkown"
+function M:d(fmt, ...)
     if(self._level > self.DEBUG) then return end
-    print("[DEBUG - "..tag.."] : " .. msg)
+    self:log("DEBUG", fmt, ...)
 end
 
-function M:i(msg,tag)
-    tag = tag or "unkown"
-    msg = msg or "unkown"
+function M:i(fmt, ...)
     if(self._level > self.INFO) then return end
-    print("[INFO - "..tag.."] : " .. msg)
+    self:log("INFO", fmt, ...)
 end
 
-function M:w(msg,tag)
-    tag = tag or "unkown"
-    msg = msg or "unkown"
+function M:w(fmt, ...)
     if(self._level > self.WARN) then return end
-    print("[WARN - "..tag.."] : " .. msg)
+    self:log("WARN", fmt, ...)
 end
 
-function M:e(msg,tag)
-    tag = tag or "unkown"
-    msg = msg or "unkown"
+function M:e(fmt, ...)
     if(self._level > self.ERROR) then return end
-    print("[ERROR - "..tag.."] : " .. msg)
+    self:log("ERROR", fmt, ...)
 end
 
+function M:log(level, fmt, ...)
+    local t = {
+        string.format("[%s]", level),
+        " ",
+        string.format(tostring(fmt), ...)
+    }
+    print(table.concat(t))
+end
 
 function M:setLevel(level)
     if level < self.DEBUG or level > self.ERROR then 
