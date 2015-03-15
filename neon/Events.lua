@@ -9,7 +9,7 @@
 require("neon.utils")
 
 
-local M = neon.class("EventDispatcher")
+local M = neon.class("Events")
 
 function M:ctor()
     self._eventTable = {}

@@ -11,8 +11,8 @@ neon = neon or {}
 require("neon.utils")
 
 neon.View = require("neon.View")
-neon.EventDispatcher = require("neon.EventDispatcher")
+neon.Events = require("neon.Events")
 neon.Neon = require("neon.Neon")
 
 -- events是可以跨app的
-neon.events = neon.EventDispatcher.new()
+neon.events = neon.Events.new()
