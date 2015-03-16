@@ -6,9 +6,6 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-require("neon.utils")
-
-
 local M = class("Events")
 
 function M:ctor()
