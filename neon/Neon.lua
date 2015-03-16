@@ -1,6 +1,4 @@
-require("neon.utils")
-
-local M = neon.class("Neon")
+local M = class("Neon")
 
 function M:ctor()
     self.running = false

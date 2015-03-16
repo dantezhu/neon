@@ -7,9 +7,7 @@
 --
 
 
-require("neon.utils")
-
-local M = neon.class("View")
+local M = class("View")
 
 function M:ctor(app)
    self.app = app

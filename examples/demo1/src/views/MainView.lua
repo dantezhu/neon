@@ -1,4 +1,4 @@
-local M = neon.class("MainView", neon.View)
+local M = class("MainView", neon.View)
 
 function M:onCreate()
     neon.loge("onCreate %s", self.__cname)

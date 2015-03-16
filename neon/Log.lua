@@ -1,4 +1,4 @@
-local M = neon.class("Log")
+local M = class("Log")
 
 M.DEBUG = 1;
 M.INFO = 2;
