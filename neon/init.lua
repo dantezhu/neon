@@ -20,18 +20,18 @@ neon.events = neon.Events.new()
 
 -- 常用函数
 -- log相关
-function neon.logd(msg,tag) 
-    neon.logger:debug(msg,tag) 
+function neon.logd(...) 
+    neon.logger:debug(...) 
 end
 
-function neon.logi(msg,tag) 
-    neon.logger:info(msg,tag) 
+function neon.logi(...) 
+    neon.logger:info(...) 
 end
 
-function neon.logw(msg,tag) 
-    neon.logger:warn(msg,tag) 
+function neon.logw(...) 
+    neon.logger:warn(...) 
 end
 
-function neon.loge(msg,tag) 
-    neon.logger:error(msg,tag) 
+function neon.loge(...) 
+    neon.logger:error(...) 
 end
