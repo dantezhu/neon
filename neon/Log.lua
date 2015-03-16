@@ -7,29 +7,29 @@ M.ERROR = 4;
 
 M._level = M.DEBUG;
 
-function M:d(fmt, ...)
+function M:debug(fmt, ...)
     if(self._level > self.DEBUG) then return end
     self:log("DEBUG", fmt, ...)
 end
 
-function M:i(fmt, ...)
+function M:info(fmt, ...)
     if(self._level > self.INFO) then return end
     self:log("INFO", fmt, ...)
 end
 
-function M:w(fmt, ...)
+function M:warn(fmt, ...)
     if(self._level > self.WARN) then return end
     self:log("WARN", fmt, ...)
 end
 
-function M:e(fmt, ...)
+function M:error(fmt, ...)
     if(self._level > self.ERROR) then return end
     self:log("ERROR", fmt, ...)
 end
 
-function M:log(level, fmt, ...)
+function M:log(level_str, fmt, ...)
     local t = {
-        string.format("[%s]", level),
+        string.format("[%s]", level_str),
         " ",
         string.format(tostring(fmt), ...)
     }

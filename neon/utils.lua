@@ -8,17 +8,17 @@
 
 -- log相关
 function neon.logd(msg,tag) 
-    neon.logger:d(msg,tag) 
+    neon.logger:debug(msg,tag) 
 end
 
 function neon.logi(msg,tag) 
-    neon.logger:i(msg,tag) 
+    neon.logger:info(msg,tag) 
 end
 
 function neon.logw(msg,tag) 
-    neon.logger:w(msg,tag) 
+    neon.logger:warn(msg,tag) 
 end
 
 function neon.loge(msg,tag) 
-    neon.logger:e(msg,tag) 
+    neon.logger:error(msg,tag) 
 end
