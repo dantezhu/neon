@@ -2,11 +2,29 @@ local M = class("Neon")
 
 function M:ctor()
     self.running = false
-    self.scene = nil
+    self.scene = self:createScene()
     -- view类列表
     self.viewClasses = {}
     -- views列表
     self.views = {}
+
+    -- 通过scene注册回调
+    self.scene:registerScriptHandler(
+        function (event_type)
+            if (event_type == "enter") then
+                self:onEnter()
+            elseif (event_type == "enterTransitionFinish") then
+                self:onEnterTransitionFinish()
+            elseif (event_type == "exitTransitionStart") then
+                self:onExitTransitionStart()
+            elseif (event_type == "exit") then
+                self:onExit()
+            elseif (event_type == "cleanup") then
+                self:onCleanup()
+
+                self:cleanup()
+            end
+        end)
 
     self:onCreate()
 end
@@ -30,9 +48,14 @@ function M:onCleanup()
     -- 继承
 end
 
+function M:createScene()
+    -- 可以继承
+    return cc.Scene:create()
+end
+
 -- 启动
--- 不允许指定viewName，是因为希望继承者自己在onEnter中实现
-function M:run(transFunc, pushScene)
+-- 不允许指定viewName，是因为希望继承者自己在onEnterTransitionFinish中实现，或者在run之后自己调用
+function M:run(transFunc, isPushScene)
     -- 启动过一次就不启动了
     if self.running then
         return
@@ -40,33 +63,13 @@ function M:run(transFunc, pushScene)
         self.running = true
     end
 
-    self.scene = cc.Scene:create()
-
-    -- 通过scene注册回调
-    self.scene:registerScriptHandler(
-        function (event_type)
-            if (event_type == "enter") then
-                self:onEnter()
-            elseif (event_type == "enterTransitionFinish") then
-                self:onEnterTransitionFinish()
-            elseif (event_type == "exitTransitionStart") then
-                self:onExitTransitionStart()
-            elseif (event_type == "exit") then
-                self:onExit()
-            elseif (event_type == "cleanup") then
-                self:onCleanup()
-
-                self:cleanup()
-            end
-        end)
-
     local transition = self.scene
     if transFunc then
         transition = transFunc(self.scene)
     end
 
     if cc.Director:getInstance():getRunningScene() then
-        if pushScene then
+        if isPushScene then
             cc.Director:getInstance():pushScene(transition)
         else
             cc.Director:getInstance():replaceScene(transition)
