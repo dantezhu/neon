@@ -54,7 +54,7 @@ function M:createScene()
 end
 
 -- 启动
--- 不允许指定viewName，是因为希望继承者自己在onEnterTransitionFinish中实现，或者在run之后自己调用
+-- showView 希望继承者自己在onCreate / onEnterTransitionFinish中实现，或者在run之后自己调用
 function M:run(transFunc, isPushScene)
     -- 启动过一次就不启动了
     if self.running then
