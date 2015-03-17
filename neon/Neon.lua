@@ -55,6 +55,7 @@ end
 
 -- 启动
 -- showView 希望继承者自己在onCreate / onEnterTransitionFinish中实现，或者在run之后自己调用
+-- onCreate 和 onEnterTransitionFinish 的区别是view跟着scene一起进入还是等进入动画结束后再显示view
 function M:run(transFunc, isPushScene)
     -- 启动过一次就不启动了
     if self.running then
