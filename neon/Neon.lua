@@ -32,6 +32,11 @@ end
 function M:onCreate()
     -- 继承
 end
+
+function M:onRun()
+    -- 继承
+end
+
 function M:onEnter()
     -- 继承
 end
@@ -54,9 +59,10 @@ function M:createScene()
 end
 
 -- 启动
--- viewname 希望继承者自己在onCreate / onEnterTransitionFinish中实现，或者在run之后自己调用
--- onCreate 和 onEnterTransitionFinish 的区别是view跟着scene一起进入还是等进入动画结束后再显示view
-function M:run(transFunc, isPushScene)
+-- renderView 希望继承者自己在onRun / onEnterTransitionFinish中实现，或者在run之后自己调用
+-- onRun 和 onEnterTransitionFinish 的区别是view跟着scene一起进入还是等进入动画结束后再显示view
+-- options: trans, push
+function M:run(options)
     -- 启动过一次就不启动了
     if self.running then
         return
@@ -64,13 +70,15 @@ function M:run(transFunc, isPushScene)
         self.running = true
     end
 
+    options = options or {}
+
     local transition = self.scene
-    if transFunc then
-        transition = transFunc(self.scene)
+    if options.trans then
+        transition = options.trans(self.scene)
     end
 
     if cc.Director:getInstance():getRunningScene() then
-        if isPushScene then
+        if options.push then
             cc.Director:getInstance():pushScene(transition)
         else
             cc.Director:getInstance():replaceScene(transition)
@@ -78,6 +86,8 @@ function M:run(transFunc, isPushScene)
     else
         cc.Director:getInstance():runWithScene(transition)
     end
+
+    self:onRun()
 end
 
 -- 清空

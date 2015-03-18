@@ -21,9 +21,11 @@ local function appRun1()
     app:renderView("LoadingView")
 
     app = require("MyApp").new()
-    app:run(function (scene)
-        return cc.TransitionFade:create(1,scene)
-    end)
+    app:run({
+            trans=function (scene)
+                return cc.TransitionFade:create(1,scene)
+            end
+    })
     app:renderView("MainView")
 end
 
@@ -35,9 +37,12 @@ local function appRun2()
     app:renderView("LoadingView")
 
     app = require("MyApp").new()
-    app:run(function (scene)
-        return cc.TransitionFade:create(1,scene)
-    end, true)
+    app:run({
+            trans=function (scene)
+                return cc.TransitionFade:create(1,scene)
+            end,
+            push=true
+    })
     app:renderView("MainView")
     
     cc.Director:getInstance():getScheduler():scheduleScriptFunc(function() 
@@ -57,8 +62,8 @@ local function main()
     cc.Director:getInstance():getOpenGLView():setDesignResolutionSize(480, 320, cc.ResolutionPolicy.SHOW_ALL)
 
     -- 无论是push还是pop还是replace，只要带上trans，连续调用两个刚才的函数，就会导致cleanup之类的函数执行不到。
-    appRun1()
-    -- appRun2()
+    -- appRun1()
+    appRun2()
 end
 
 
