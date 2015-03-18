@@ -18,13 +18,13 @@ end
 local function appRun1()
     local app = require("MyApp").new()
     app:run()
-    app:showView("LoadingView")
+    app:renderView("LoadingView")
 
     app = require("MyApp").new()
     app:run(function (scene)
         return cc.TransitionFade:create(1,scene)
     end)
-    app:showView("MainView")
+    app:renderView("MainView")
 end
 
 poped = false
@@ -32,13 +32,13 @@ poped = false
 local function appRun2()
     local app = require("MyApp").new()
     app:run()
-    app:showView("LoadingView")
+    app:renderView("LoadingView")
 
     app = require("MyApp").new()
     app:run(function (scene)
         return cc.TransitionFade:create(1,scene)
     end, true)
-    app:showView("MainView")
+    app:renderView("MainView")
     
     cc.Director:getInstance():getScheduler():scheduleScriptFunc(function() 
         if not poped then

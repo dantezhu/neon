@@ -72,3 +72,5 @@ function M:setVisible(visible)
         self:onVisibleChange(visible)
     end
 end
+
+return M
