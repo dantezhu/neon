@@ -20,11 +20,15 @@ function M:ctor(app)
 end
 
 function M:onCreate()
-    -- 继承重写
+    -- view创建时，继承重写
+end
+
+function M:onRender(params)
+    -- view被渲染时，继承重写
 end
 
 function M:onRemove()
-    -- 继承重写
+    -- view被移除时，继承重写
 end
 
 function M:onVisibleChange(visible)
@@ -34,6 +38,11 @@ end
 function M:createRoot()
     -- 可以继承重写
     return cc.Layer:create()   
+end
+
+function M:render(params)
+    -- 渲染
+    self:onRender(params)
 end
 
 function M:remove()
@@ -54,21 +63,12 @@ function M:remove()
 end
 
 function M:isVisible()
-    return self.root ~= nil and self.root:isVisible()
+    return self.root and self.root:isVisible()
 end
 
-function M:show()
-    if self.root and not self.root:isVisible() then
-        self.root:setVisible(true)
-        self:onVisibleChange(true)
+function M:setVisible(visible)
+    if self.root and self.root:isVisible() ~= visible then
+        self.root:setVisible(visible)
+        self:onVisibleChange(visible)
     end
 end
-
-function M:hide()
-    if self.root and self.root:isVisible() then
-        self.root:setVisible(false)
-        self:onVisibleChange(false)
-    end
-end
-
-return M

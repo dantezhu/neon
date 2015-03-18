@@ -54,7 +54,7 @@ function M:createScene()
 end
 
 -- 启动
--- showView 希望继承者自己在onCreate / onEnterTransitionFinish中实现，或者在run之后自己调用
+-- viewname 希望继承者自己在onCreate / onEnterTransitionFinish中实现，或者在run之后自己调用
 -- onCreate 和 onEnterTransitionFinish 的区别是view跟着scene一起进入还是等进入动画结束后再显示view
 function M:run(transFunc, isPushScene)
     -- 启动过一次就不启动了
@@ -104,7 +104,9 @@ function M:getView(name)
     return self.views[name]
 end
 
-function M:showView(name)
+function M:renderView(name, params)
+    -- 渲染view
+
     local view = self:getView(name)
     if not view then
         view = self:createView(name)
@@ -113,7 +115,7 @@ function M:showView(name)
         end
     end
 
-    view:show()
+    view:render(params)
 end
 
 function M:removeView(name)
@@ -131,11 +133,21 @@ function M:removeAllViews()
     end
 end
 
-function M:hideView(name)
+function M:setVisibleView(name, visible)
+    -- 仅作可见性变化
     local view = self:getView(name)
 
     if view then
-        view:hide()
+        view:setVisible(visible)
+    end
+end
+
+function M:isVisibleView(name)
+    -- 仅作可见性变化
+    local view = self:getView(name)
+
+    if view then
+        return view:isVisible()
     end
 end
 
