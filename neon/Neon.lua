@@ -143,8 +143,7 @@ function M:removeAllViews()
     end
 end
 
-function M:setVisibleView(name, visible)
-    -- 仅作可见性变化
+function M:setViewVisible(name, visible)
     local view = self:getView(name)
 
     if view then
@@ -152,8 +151,7 @@ function M:setVisibleView(name, visible)
     end
 end
 
-function M:isVisibleView(name)
-    -- 仅作可见性变化
+function M:isViewVisible(name)
     local view = self:getView(name)
 
     if view then
