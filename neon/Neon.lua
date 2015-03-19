@@ -89,9 +89,12 @@ end
 
 -- 清空
 function M:cleanup()
+    self.running = false
     self:removeAllViews()
     self.viewClasses = {}
     self.scene = nil
+    self.enterTransition = nil
+    self.replaceScene = true
     neon.events:delHandlersForTarget(self)
 end
 
