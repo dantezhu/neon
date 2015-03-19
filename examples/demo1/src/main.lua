@@ -41,7 +41,7 @@ local function appRun2()
             trans=function (scene)
                 return cc.TransitionFade:create(1,scene)
             end,
-            push=true
+            replace=false
     })
     app:renderView("MainView")
     
@@ -62,8 +62,8 @@ local function main()
     cc.Director:getInstance():getOpenGLView():setDesignResolutionSize(480, 320, cc.ResolutionPolicy.SHOW_ALL)
 
     -- 无论是push还是pop还是replace，只要带上trans，连续调用两个刚才的函数，就会导致cleanup之类的函数执行不到。
-    -- appRun1()
-    appRun2()
+    appRun1()
+    -- appRun2()
 end
 
 

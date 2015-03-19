@@ -2,11 +2,17 @@ local M = class("Neon")
 
 function M:ctor()
     self.running = false
-    self.scene = self:createScene()
     -- view类列表
     self.viewClasses = {}
     -- views列表
     self.views = {}
+
+    -- scene
+    self.scene = self:createScene()
+    -- 进入效果, 可在onRun里面修改
+    self.enterTransition = self.scene
+    -- 是否替换旧scene
+    self.replaceScene = true
 
     -- 通过scene注册回调
     self.scene:registerScriptHandler(
@@ -33,7 +39,7 @@ function M:onCreate()
     -- 继承
 end
 
-function M:onRun()
+function M:onRun(params)
     -- 继承
 end
 
@@ -59,10 +65,8 @@ function M:createScene()
 end
 
 -- 启动
--- renderView 希望继承者自己在onRun / onEnterTransitionFinish中实现，或者在run之后自己调用
 -- onRun 和 onEnterTransitionFinish 的区别是view跟着scene一起进入还是等进入动画结束后再显示view
--- options: trans, push
-function M:run(options)
+function M:run(params)
     -- 启动过一次就不启动了
     if self.running then
         return
@@ -70,24 +74,17 @@ function M:run(options)
         self.running = true
     end
 
-    options = options or {}
-
-    local transition = self.scene
-    if options.trans then
-        transition = options.trans(self.scene)
-    end
+    self:onRun(params)
 
     if cc.Director:getInstance():getRunningScene() then
-        if options.push then
-            cc.Director:getInstance():pushScene(transition)
+        if self.replaceScene then
+            cc.Director:getInstance():replaceScene(self.enterTransition)
         else
-            cc.Director:getInstance():replaceScene(transition)
+            cc.Director:getInstance():pushScene(self.enterTransition)
         end
     else
-        cc.Director:getInstance():runWithScene(transition)
+        cc.Director:getInstance():runWithScene(self.enterTransition)
     end
-
-    self:onRun()
 end
 
 -- 清空

@@ -23,4 +23,16 @@ function M:onCreate()
     end, self)
 end
 
+function M:onRun(params)
+    neon.logd("onRun. params: %s", params)
+
+    if params and params.trans ~= nil then
+        self.enterTransition = params.trans(self.scene)
+    end
+
+    if params and params.replace ~= nil then
+        self.replaceScene = params.replace
+    end
+end
+
 return M
