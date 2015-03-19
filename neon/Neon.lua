@@ -16,16 +16,16 @@ function M:ctor()
 
     -- 通过scene注册回调
     self.scene:registerScriptHandler(
-        function (event_type)
-            if (event_type == "enter") then
+        function (eventType)
+            if (eventType == "enter") then
                 self:onEnter()
-            elseif (event_type == "enterTransitionFinish") then
+            elseif (eventType == "enterTransitionFinish") then
                 self:onEnterTransitionFinish()
-            elseif (event_type == "exitTransitionStart") then
+            elseif (eventType == "exitTransitionStart") then
                 self:onExitTransitionStart()
-            elseif (event_type == "exit") then
+            elseif (eventType == "exit") then
                 self:onExit()
-            elseif (event_type == "cleanup") then
+            elseif (eventType == "cleanup") then
                 self:onCleanup()
 
                 self:cleanup()
