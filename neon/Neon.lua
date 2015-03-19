@@ -137,9 +137,23 @@ function M:removeView(name)
     end
 end
 
-function M:removeAllViews()
+function M:removeAllViews(exclude)
+
     for name,view in pairs(self.views) do
-        self:removeView(name)
+        local canRemove = true
+
+        if exclude then
+            for i, v in ipairs(exclude) do
+                if name == v then
+                    canRemove = false
+                    break
+                end
+            end
+        end
+
+        if canRemove then
+            self:removeView(name)
+        end
     end
 end
 
