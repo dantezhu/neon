@@ -13,8 +13,8 @@ function M:info(msg, ...)
     self:log(neon.logging.INFO, msg, ...)
 end
 
-function M:warn(msg, ...)
-    self:log(neon.logging.WARN, msg, ...)
+function M:warning(msg, ...)
+    self:log(neon.logging.WARNING, msg, ...)
 end
 
 function M:error(msg, ...)

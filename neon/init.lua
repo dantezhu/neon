@@ -30,9 +30,13 @@ function neon.logi(...)
 end
 
 function neon.logw(...) 
-    neon.logger:warn(...) 
+    neon.logger:warning(...) 
 end
 
 function neon.loge(...) 
     neon.logger:error(...) 
+end
+
+function neon.logc(...)
+    neon.logger:critical(...) 
 end
