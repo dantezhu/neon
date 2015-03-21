@@ -5,44 +5,36 @@ function M:ctor()
     self.handlers = {}
 end
 
-function M:debug(msg, ...)
-    self:log(neon.logging.DEBUG, msg, ...)
+function M:debug(fmt, ...)
+    self:log(neon.logging.DEBUG, fmt, ...)
 end
 
-function M:info(msg, ...)
-    self:log(neon.logging.INFO, msg, ...)
+function M:info(fmt, ...)
+    self:log(neon.logging.INFO, fmt, ...)
 end
 
-function M:warning(msg, ...)
-    self:log(neon.logging.WARNING, msg, ...)
+function M:warning(fmt, ...)
+    self:log(neon.logging.WARNING, fmt, ...)
 end
 
-function M:error(msg, ...)
-    self:log(neon.logging.ERROR, msg, ...)
+function M:error(fmt, ...)
+    self:log(neon.logging.ERROR, fmt, ...)
 end
 
-function M:critical(msg, ...)
-    self:log(neon.logging.CRITICAL, msg, ...)
+function M:critical(fmt, ...)
+    self:log(neon.logging.CRITICAL, fmt, ...)
 end
 
-function M:fatal(msg, ...)
-    self:critical(msg, ...)
+function M:fatal(fmt, ...)
+    self:critical(fmt, ...)
 end
 
-function M:log(level, msg, ...)
+function M:log(level, fmt, ...)
     if (self._level > level) then 
         return 
     end
 
-    local t = {
-        string.format("[%s]", neon.logging.LEVEL_DESC[level]),
-        " ",
-        string.format(tostring(msg), ...)
-    }
-
-    record = table.concat(t)
-
-    self:handle(level, record)
+    self:handle(level, string.format(fmt, ...))
 end
 
 function M:getLevel()
@@ -65,9 +57,9 @@ function M:removeHandler(handler)
     end
 end
 
-function M:handle(level, record)
+function M:handle(level, msg)
     for idx,handler in ipairs(self.handlers) do
-        handler:handle(level, record)
+        handler:handle(level, msg)
     end
 end
 

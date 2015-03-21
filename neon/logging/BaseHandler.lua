@@ -12,12 +12,22 @@ function M:setLevel(level)
     self._level = level
 end
 
-function M:handle(level, record)
+function M:handle(level, msg)
     if (self._level > level) then 
         return 
     end
     
+    record = self:format(level, msg)
     self:emit(record)
+end
+
+function M:format(level, msg)
+    -- 可以继承重写
+    return string.format("[%s][%s] %s",
+        neon.logging.LEVEL_DESC[level],
+        os.date("%Y-%m-%d %H:%M:%S", os.time()),
+        msg
+    )
 end
 
 function M:emit(record)
