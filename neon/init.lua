@@ -18,25 +18,3 @@ neon.logger = neon.logging.Logger.new()
 neon.logger:addHandler(neon.logging.StreamHandler.new())
 -- events是可以跨app的
 neon.events = neon.Events.new()
-
--- 常用函数
--- log相关
-function neon.logd(...) 
-    neon.logger:debug(...) 
-end
-
-function neon.logi(...) 
-    neon.logger:info(...) 
-end
-
-function neon.logw(...) 
-    neon.logger:warning(...) 
-end
-
-function neon.loge(...) 
-    neon.logger:error(...) 
-end
-
-function neon.logc(...)
-    neon.logger:critical(...) 
-end

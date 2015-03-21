@@ -7,7 +7,7 @@ function M:onCreate()
 end
 
 function M:onRun(params)
-    neon.logd("onRun. params: %s", params)
+    neon.logger:debug("onRun. params: %s", params)
 
     self:renderView("MainView")
 end

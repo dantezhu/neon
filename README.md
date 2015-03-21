@@ -30,7 +30,7 @@ lua 类mvc framework，支持 cocos2dx-3.4
 
 * Logger
 
-    日志。默认有 neon.logger，以及 neon.loge, neon.logw, neon.logi, neon.logd
+    日志。默认有 neon.logger
 
 #### 二. 使用说明
 

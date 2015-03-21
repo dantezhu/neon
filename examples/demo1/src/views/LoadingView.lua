@@ -1,7 +1,7 @@
 local M = class("LoadingView", neon.View)
 
 function M:onCreate()
-    neon.loge("onCreate %s", self.__cname)
+    neon.logger:error("onCreate %s", self.__cname)
 
     local layer = cc.LayerColor:create(cc.c4b(255,0,255,255))
 
@@ -22,17 +22,17 @@ function M:onCreate()
     layer:getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, layer)
 
     neon.events:addHandler(EVT.test, function ()
-        neon.loge("evt test")
+        neon.logger:error("evt test")
     end, self)
 end
 
 function M:onRemove()
-    neon.loge("onRemove %s", self.__cname)
+    neon.logger:error("onRemove %s", self.__cname)
     neon.events:delHandlersForTarget(self)
 end
 
 function M:onRender(params)
-    neon.logd("params: %s", params)
+    neon.logger:debug("params: %s", params)
 
     if params then
         self.label:setString(string.format("%d", params.num))

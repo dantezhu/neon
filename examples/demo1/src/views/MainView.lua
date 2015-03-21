@@ -1,7 +1,7 @@
 local M = class("MainView", neon.View)
 
 function M:onCreate()
-    neon.loge("onCreate %s", self.__cname)
+    neon.logger:error("onCreate %s", self.__cname)
 
     local layer = cc.LayerColor:create(cc.c4b(0,0,255,255))
     self.root:addChild(layer)
@@ -22,11 +22,11 @@ function M:onCreate()
 end
 
 function M:onRemove()
-    neon.loge("onRemove %s", self.__cname)
+    neon.logger:error("onRemove %s", self.__cname)
 end
 
 function M:onRender(params)
-    neon.logd("params: %s", params)
+    neon.logger:debug("params: %s", params)
 
     if params then
         self.label:setString(string.format("%d", params.num))
