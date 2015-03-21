@@ -23,9 +23,8 @@ end
 
 function M:format(level, msg)
     -- 可以继承重写
-    return string.format("[%s][%s] %s",
+    return string.format("[%s] %s",
         neon.logging.LEVEL_DESC[level],
-        os.date("%Y-%m-%d %H:%M:%S", os.time()),
         msg
     )
 end
