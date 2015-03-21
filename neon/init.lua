@@ -8,13 +8,14 @@
 
 neon = neon or {}
 
-neon.Logger = require("neon.Logger")
+require("neon.logging.init")
 neon.View = require("neon.View")
 neon.Events = require("neon.Events")
 neon.Neon = require("neon.Neon")
 
 -- 默认logger
-neon.logger = neon.Logger.new()
+neon.logger = neon.logging.Logger.new()
+neon.logger:addHandler(neon.logging.StreamHandler.new())
 -- events是可以跨app的
 neon.events = neon.Events.new()
 
