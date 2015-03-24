@@ -5,4 +5,5 @@ EVT.SHOW_LOADING = 2
 EVT.TEST = 3
 
 -- 示例
+CONFIG = {}
 CONFIG.APP_NAME = "demo1"
