@@ -3,3 +3,6 @@ EVT = {}
 EVT.SHOW_GAME = 1
 EVT.SHOW_LOADING = 2
 EVT.TEST = 3
+
+-- 示例
+CONFIG.APP_NAME = "demo1"
