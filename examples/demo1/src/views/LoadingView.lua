@@ -14,14 +14,14 @@ function M:onCreate()
     local listener = cc.EventListenerTouchOneByOne:create()
 
     listener:registerScriptHandler(function (touch, event)
-            neon.events:postEvent(EVT.test)
+            neon.events:postEvent(EVT.TEST)
             self.app:removeView(self.__cname)
-            neon.events:postEvent(EVT.show_game, self.__cname)
+            neon.events:postEvent(EVT.SHOW_GAME, self.__cname)
     end, cc.Handler.EVENT_TOUCH_BEGAN)
 
     layer:getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, layer)
 
-    neon.events:addHandler(EVT.test, function ()
+    neon.events:addHandler(EVT.TEST, function ()
         neon.logger:error("evt test")
     end, self)
 end

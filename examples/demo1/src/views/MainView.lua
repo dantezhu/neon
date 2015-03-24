@@ -15,7 +15,7 @@ function M:onCreate()
 
     listener:registerScriptHandler(function (touch, event)
             self.app:removeView(self.__cname)
-            neon.events:postEvent(EVT.show_loading, self.__cname)
+            neon.events:postEvent(EVT.SHOW_LOADING, self.__cname)
     end, cc.Handler.EVENT_TOUCH_BEGAN)
 
     layer:getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, layer)
