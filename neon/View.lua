@@ -46,13 +46,16 @@ function M:render(params)
 end
 
 function M:remove()
-    if self.root then
-        -- 放在前面
-        self:onRemove()
-
-        self.root:removeFromParent(true)
-        self.root = nil
+    if not self.root then
+        -- 保证重复调用无效
+        return
     end
+
+    -- 放在前面
+    self:onRemove()
+
+    self.root:removeFromParent(true)
+    self.root = nil
 
     -- 放在最后，免得中途又注册
     neon.events:delHandlersForTarget(self)
