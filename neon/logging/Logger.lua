@@ -6,35 +6,42 @@ function M:ctor()
 end
 
 function M:debug(fmt, ...)
-    self:log(neon.logging.DEBUG, fmt, ...)
+    self:_log(neon.logging.DEBUG, fmt, ...)
 end
 
 function M:info(fmt, ...)
-    self:log(neon.logging.INFO, fmt, ...)
+    self:_log(neon.logging.INFO, fmt, ...)
 end
 
 function M:warning(fmt, ...)
-    self:log(neon.logging.WARNING, fmt, ...)
+    self:_log(neon.logging.WARNING, fmt, ...)
 end
 
 function M:error(fmt, ...)
-    self:log(neon.logging.ERROR, fmt, ...)
+    self:_log(neon.logging.ERROR, fmt, ...)
 end
 
 function M:critical(fmt, ...)
-    self:log(neon.logging.CRITICAL, fmt, ...)
+    self:_log(neon.logging.CRITICAL, fmt, ...)
 end
 
 function M:fatal(fmt, ...)
-    self:critical(fmt, ...)
+    self:_log(neon.logging.CRITICAL, fmt, ...)
 end
 
-function M:log(level, fmt, ...)
+function M:_log(level, fmt, ...)
+    -- 外界不能调用
     if (self._level > level) then 
         return 
     end
 
-    self:handle(level, string.format(fmt, ...))
+    local record = {
+        level=level,
+        caller=self:trimString(self:splitString(debug.traceback("", 2), "\n")[4]),
+        msg=string.format(fmt, ...),
+    }
+
+    self:handle(record)
 end
 
 function M:getLevel()
@@ -57,10 +64,29 @@ function M:removeHandler(handler)
     end
 end
 
-function M:handle(level, msg)
+function M:handle(record)
     for idx,handler in ipairs(self.handlers) do
-        handler:handle(level, msg)
+        handler:handle(record)
     end
+end
+
+function M:splitString(input, delimiter)
+    input = tostring(input)
+    delimiter = tostring(delimiter)
+    if (delimiter=='') then return false end
+    local pos,arr = 0, {}
+    -- for each divider found
+    for st,sp in function() return string.find(input, delimiter, pos, true) end do
+        table.insert(arr, string.sub(input, pos, st - 1))
+        pos = sp + 1
+    end
+    table.insert(arr, string.sub(input, pos))
+    return arr
+end
+
+function M:trimString(input)
+    input = string.gsub(input, "^[ \t\n\r]+", "")
+    return string.gsub(input, "[ \t\n\r]+$", "")
 end
 
 return M
