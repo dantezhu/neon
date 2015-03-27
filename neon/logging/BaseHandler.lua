@@ -22,10 +22,12 @@ end
 
 function M:format(record)
     -- 可以继承重写
-    return string.format("[%s][%s]\n%s",
+    return string.format("\n%s\n[%s][%s]\n%s\n%s",
+        "/--------------------------------------------------------------------------------",
         neon.logging.LEVEL_DESC[record.level],
         record.caller,
-        record.msg
+        record.msg,
+        "--------------------------------------------------------------------------------/"
     )
 end
 
