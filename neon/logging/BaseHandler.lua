@@ -25,7 +25,7 @@ function M:format(record)
     return string.format("[%s][%s]\n%s",
         neon.logging.LEVEL_DESC[record.level],
         record.caller,
-        msg
+        record.msg
     )
 end
 
