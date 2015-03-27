@@ -37,7 +37,8 @@ function M:_log(level, fmt, ...)
 
     local record = {
         level=level,
-        caller=self:trimString(self:splitString(debug.traceback("", 2), "\n")[4]),
+        -- 变化调用层级的话，修改第一个3
+        caller=self:trimString(self:splitString(debug.traceback("", 3), "\n")[3]),
         msg=string.format(fmt, ...),
     }
 
