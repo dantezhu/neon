@@ -8,10 +8,7 @@ require "neon.init"
 
 -- for CCLuaEngine traceback
 function __G__TRACKBACK__(msg)
-    neon.logger:error("----------------------------------------")
-    neon.logger:error("LUA ERROR: " .. tostring(msg) .. "\n")
-    neon.logger:error(debug.traceback())
-    neon.logger:error("----------------------------------------")
+    neon.logger:error("exc occur: %s\n%s", tostring(msg), debug.traceback())
     return msg
 end
 
