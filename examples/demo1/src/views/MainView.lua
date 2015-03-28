@@ -26,7 +26,7 @@ function M:onRemove()
 end
 
 function M:onRender(params)
-    neon.logger:debug("params: %s", params)
+    neon.logger:debug("params: %s", tostring(params))
 
     if params then
         self.label:setString(string.format("%d", params.num))

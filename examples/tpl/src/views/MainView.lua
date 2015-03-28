@@ -12,7 +12,7 @@ function M:onRemove()
 end
 
 function M:onRender(params)
-    neon.logger:debug("params: %s", params)
+    neon.logger:debug("params: %s", tostring(params))
 end
 
 return M

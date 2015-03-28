@@ -27,7 +27,7 @@ function M:onCreate()
 end
 
 function M:onRun(params)
-    neon.logger:debug("onRun. params: %s", params)
+    neon.logger:debug("onRun. params: %s", tostring(params))
 
     if params and params.trans ~= nil then
         self.enterTransition = params.trans(self.scene)
