@@ -28,7 +28,6 @@ end
 
 function M:onRemove()
     neon.logger:error("onRemove %s", self.__cname)
-    neon.events:delHandlersForTarget(self)
 end
 
 function M:onRender(params)
