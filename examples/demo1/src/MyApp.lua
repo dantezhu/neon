@@ -9,7 +9,7 @@ function M:onCreate()
     neon.logger:setLevel(neon.logging.DEBUG)
     
     local httpLogHandler = require("utils.HttpLogHandler").new()
-    neon.logger:addHandler(httpLogHandler)
+    -- neon.logger:addHandler(httpLogHandler)
     
     self:registerView(require("views.MainView"))
     self:registerView(require("views.LoadingView"))
