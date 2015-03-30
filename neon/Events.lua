@@ -37,10 +37,13 @@ end
 -- 删除
 function M:delHandler(name, callback)
     for name,handlers in pairs(self._eventTable) do
-        for key,handler in pairs(handlers) do
+        local i = 1
+        while i <= #handlers do
+            local handler = handlers[i]
             if handler.callback == callback then
-                -- 删除即清空
-                handlers[key] = nil
+                table.remove(handlers, i)
+            else
+                i = i + 1
             end
         end
     end
@@ -49,10 +52,13 @@ end
 -- 通过target删除
 function M:delHandlersForTarget(target)
     for name,handlers in pairs(self._eventTable) do
-        for key,handler in pairs(handlers) do
+        local i = 1
+        while i <= #handlers do
+            local handler = handlers[i]
             if handler.target == target then
-                -- 删除即清空
-                handlers[key] = nil
+                table.remove(handlers, i)
+            else
+                i = i + 1
             end
         end
     end
@@ -70,14 +76,14 @@ function M:postEvent(name, ...)
     end
 
     local handlers = {}
-    for key,handler in pairs(self._eventTable[name]) do
+    for i,handler in ipairs(self._eventTable[name]) do
         table.insert(handlers, handler)
     end
 
-    for key,handler in pairs(handlers) do
+    for i,handler in ipairs(handlers) do
         local found = false
         if self._eventTable[name] ~= nil then
-            for tmpkey,tmpval in pairs(self._eventTable[name]) do
+            for tmpi,tmpval in ipairs(self._eventTable[name]) do
                 if tmpval == handler then
                     found = true
                 end
