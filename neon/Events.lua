@@ -20,7 +20,7 @@ function M:addHandler(name, callback, target)
 
     local found = false
 
-    for key,val in pairs(self._eventTable[name]) do
+    for key, val in pairs(self._eventTable[name]) do
         if val.callback == callback and val.target == target then
             found = true
         end
@@ -36,22 +36,26 @@ end
 
 -- 删除
 function M:delHandler(name, callback)
-    for name,handlers in pairs(self._eventTable) do
-        local i = 1
-        while i <= #handlers do
-            local handler = handlers[i]
-            if handler.callback == callback then
-                table.remove(handlers, i)
-            else
-                i = i + 1
-            end
+    local handlers = self._eventTable[name]
+
+    if handlers == nil then
+        return
+    end
+
+    local i = 1
+    while i <= #handlers do
+        local handler = handlers[i]
+        if handler.callback == callback then
+            table.remove(handlers, i)
+        else
+            i = i + 1
         end
     end
 end
 
 -- 通过target删除
 function M:delHandlersForTarget(target)
-    for name,handlers in pairs(self._eventTable) do
+    for k, handlers in pairs(self._eventTable) do
         local i = 1
         while i <= #handlers do
             local handler = handlers[i]
@@ -80,10 +84,10 @@ function M:postEvent(name, ...)
         table.insert(handlers, handler)
     end
 
-    for i,handler in ipairs(handlers) do
+    for i, handler in ipairs(handlers) do
         local found = false
         if self._eventTable[name] ~= nil then
-            for tmpi,tmpval in ipairs(self._eventTable[name]) do
+            for tmpi, tmpval in ipairs(self._eventTable[name]) do
                 if tmpval == handler then
                     found = true
                 end
