@@ -74,6 +74,9 @@ function M:run(params)
         self.running = true
     end
 
+    if params == nil then
+        params = {}
+    end
     self:onRun(params)
 
     if cc.Director:getInstance():getRunningScene() then
@@ -125,6 +128,9 @@ function M:renderView(name, params)
         end
     end
 
+    if params == nil then
+        params = {}
+    end
     view:render(params)
 end
 
