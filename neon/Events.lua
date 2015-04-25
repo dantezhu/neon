@@ -14,6 +14,8 @@ end
 
 -- 添加
 function M:addHandler(name, callback, target)
+    assert(target ~= nil, 'target should not be nil')
+
     if self._eventTable[name] == nil then
         self._eventTable[name] = {}
     end
