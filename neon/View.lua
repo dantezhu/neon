@@ -42,6 +42,9 @@ end
 
 function M:render(params)
     -- 渲染
+    if params == nil then
+        params = {}
+    end
     self:onRender(params)
 end
 

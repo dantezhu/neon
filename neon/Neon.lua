@@ -128,9 +128,6 @@ function M:renderView(name, params)
         end
     end
 
-    if params == nil then
-        params = {}
-    end
     view:render(params)
 end
 
