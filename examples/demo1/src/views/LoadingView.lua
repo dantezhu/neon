@@ -33,7 +33,7 @@ end
 function M:onRender(params)
     neon.logger:debug("params: %s", tostring(params))
 
-    if params then
+    if params.num ~= nil then
         self.label:setString(string.format("%d", params.num))
     end
 end
