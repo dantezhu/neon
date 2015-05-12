@@ -1,4 +1,4 @@
-require("Constants")
+require("Config")
 
 
 local M = class("MyApp", neon.Neon)
