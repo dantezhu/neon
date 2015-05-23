@@ -129,6 +129,8 @@ function M:renderView(name, params)
     end
 
     view:render(params)
+
+    return view
 end
 
 function M:removeView(name)
