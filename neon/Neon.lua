@@ -120,15 +120,14 @@ end
 function M:renderView(name, params)
     -- 渲染view
 
-    local view = self:getView(name)
-    if not view then
-        view = self:createView(name)
-        if view then
-            self.views[name] = view
-        end
-    end
+    -- 先删掉
+    self:removeView(name)
 
-    view:render(params)
+    view = self:createView(name)
+    if view then
+        self.views[name] = view
+        view:render(params)
+    end
 
     return view
 end
