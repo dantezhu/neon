@@ -9,22 +9,22 @@
 
 local M = class("View")
 
-function M:ctor(app)
+function M:ctor(app, params)
    self.app = app
 
    -- 节点
    self.root = self:createRoot()
    self.app.scene:addChild(self.root)
 
-   self:onCreate()
+   self:onCreate(params)
 end
 
 function M:onCreate()
     -- view创建时，继承重写
 end
 
-function M:onRender(params)
-    -- view被渲染时，继承重写
+function M:onResume()
+    -- view激活时，继承重写
 end
 
 function M:onRemove()
@@ -40,12 +40,8 @@ function M:createRoot()
     return cc.Layer:create()   
 end
 
-function M:render(params)
-    -- 渲染
-    if params == nil then
-        params = {}
-    end
-    self:onRender(params)
+function M:resume()
+    self:onResume()
 end
 
 function M:remove()
@@ -62,10 +58,6 @@ function M:remove()
 
     -- 放在最后，免得中途又注册
     neon.events:delHandlersForTarget(self)
-    -- 防止删错
-    if self.app.views[self.__cname] == self then
-        self.app.views[self.__cname] = nil
-    end
 end
 
 function M:isVisible()
