@@ -6,8 +6,6 @@ function M:ctor()
     self.viewClasses = {}
     -- views列表
     self.views = {}
-    -- views堆栈列表
-    self.viewStack = {}
 
     -- scene
     self.scene = self:createScene()
@@ -132,8 +130,6 @@ function M:renderView(name, params)
     view = self:createView(name, params)
     if view then
         self.views[name] = view
-        table.insert(self.viewStack, view)
-        view:resume()
     end
 
     return view
@@ -174,20 +170,6 @@ function M:explicitRemoveView(view)
     -- 防止删错
     if self.views[view.__cname] == view then
         self.views[view.__cname] = nil
-    end
-
-    local resumeNew = false
-
-    if #self.viewStack > 0 and self.viewStack[#self.viewStack] == view then
-        -- 说明最后一个view就是要删除的view，那么新的显示的view将会执行onResume
-        resumeNew = true
-    end
-
-    -- 把所有相等的view都删掉，但实际上应该就一个
-    table.removebyvalue(self.viewStack, view, true)
-
-    if #self.viewStack > 0 then
-        self.viewStack[#self.viewStack].resume()
     end
 end
 

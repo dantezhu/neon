@@ -29,8 +29,4 @@ function M:onRemove()
     neon.logger:error("onRemove %s", self.__cname)
 end
 
-function M:onResume()
-    neon.logger:error("%s", self.__cname)
-end
-
 return M

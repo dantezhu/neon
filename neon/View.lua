@@ -19,12 +19,8 @@ function M:ctor(app, params)
    self:onCreate(params)
 end
 
-function M:onCreate()
+function M:onCreate(params)
     -- view创建时，继承重写
-end
-
-function M:onResume()
-    -- view激活时，继承重写
 end
 
 function M:onRemove()
@@ -58,6 +54,8 @@ function M:remove()
 
     -- 放在最后，免得中途又注册
     neon.events:delHandlersForTarget(self)
+
+    self.app:explicitRemoveView(self)
 end
 
 function M:isVisible()
