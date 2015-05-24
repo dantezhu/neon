@@ -1,6 +1,6 @@
 local M = class("LoadingView", neon.View)
 
-function M:onCreate()
+function M:onCreate(params)
     neon.logger:error("onCreate %s", self.__cname)
 
     local layer = cc.LayerColor:create(cc.c4b(255,0,255,255))
@@ -24,18 +24,18 @@ function M:onCreate()
     neon.events:addHandler(EVT.TEST, function ()
         neon.logger:error("evt test")
     end, self)
+
+    if params.num ~= nil then
+        self.label:setString(string.format("%d", params.num))
+    end
 end
 
 function M:onRemove()
     neon.logger:error("onRemove %s", self.__cname)
 end
 
-function M:onRender(params)
-    neon.logger:debug("params: %s", tostring(params))
-
-    if params.num ~= nil then
-        self.label:setString(string.format("%d", params.num))
-    end
+function M:onResume()
+    neon.logger:error("%s", self.__cname)
 end
 
 return M
