@@ -36,3 +36,8 @@ lua 类mvc framework，支持 cocos2dx-3.4
 
 * 继承Neon后最主要的函数是 onRun(params)
 * 继承View后，最主要的函数是 onRender(params)
+
+
+view 区分 onCreate 和 onRender(params) 的好处在于，onCreate可以处理那些与传入数据没关系的，而onRender则是与数据有关，比如flask的render_template。
+
+另一方面，把所有展示逻辑都放在onCreate里面也不太好，毕竟createView调用了onCreate时，还没有将生成的view放到app.views里面。而用onRender可以弥补这个不足。
