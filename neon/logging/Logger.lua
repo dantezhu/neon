@@ -39,7 +39,7 @@ function M:_log(level, fmt, ...)
         level=level,
         -- 变化调用层级的话，修改第一个3
         caller=self:trimString(self:splitString(debug.traceback("", 3), "\n")[3]),
-        msg=string.format(fmt, ...),
+        msg=string.format(tostring(fmt), ...),
     }
 
     self:handle(record)
