@@ -15,7 +15,7 @@ LEVEL_DESC[neon.logging.CRITICAL] = "CRITICAL"
 
 neon.logging.LEVEL_DESC = LEVEL_DESC
 
-neon.logging.Logger = require("neon.logging.Logger")
+neon.logging.Logger = import(".Logger")
 
-neon.logging.BaseHandler = require("neon.logging.BaseHandler")
-neon.logging.StreamHandler = require("neon.logging.StreamHandler")
+neon.logging.BaseHandler = import(".BaseHandler")
+neon.logging.StreamHandler = import(".StreamHandler")

@@ -8,10 +8,10 @@
 
 neon = neon or {}
 
-require("neon.logging.init")
-neon.View = require("neon.View")
-neon.Events = require("neon.Events")
-neon.Neon = require("neon.Neon")
+import(".logging.init")
+neon.View = import(".View")
+neon.Events = import(".Events")
+neon.Neon = import(".Neon")
 
 -- 默认logger
 neon.logger = neon.logging.Logger.new()
