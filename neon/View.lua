@@ -10,13 +10,13 @@
 local M = class("View")
 
 function M:ctor(app)
-   self.app = app
+    self.app = app
 
-   -- 节点
-   self.root = self:createRoot()
-   self.app.scene:addChild(self.root)
+    -- 节点
+    self.root = self:createRoot()
+    self.app.scene:addChild(self.root)
 
-   self:onCreate()
+    self:onCreate()
 end
 
 function M:onCreate()
