@@ -75,6 +75,11 @@ function M:delHandlers(name)
     self._eventTable[name] = nil
 end
 
+-- 清空
+function M:clearHandlers(name)
+    self._eventTable = {}
+end
+
 -- 触发
 function M:postEvent(name, ...)
     if self._eventTable[name] == nil then
