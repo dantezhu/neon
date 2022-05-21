@@ -20,7 +20,7 @@ lua 类mvc framework，支持 cocos2dx-3.4
     一般小游戏，单个app就足够了，不同页面使用view来实现即可。如果涉及大型游戏，需要多个app也是可以的.
 
 * View
-    
+
     上文提到的View
 
 * Events
