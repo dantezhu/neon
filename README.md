@@ -6,4 +6,4 @@ neon
 
 mvc framework
 
-已有cocos2dx+lua版本，后续会添加更多版本。
+已支持cocos2dx+lua平台，后续会支持更多平台。
