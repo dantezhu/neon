@@ -77,7 +77,7 @@ function M:delHandlers(name)
 end
 
 -- 清空
-function M:clearHandlers(name)
+function M:clearHandlers()
     self._eventTable = {}
 end
 
