@@ -25,6 +25,7 @@ function M:addHandler(name, callback, target)
     for key, val in pairs(self._eventTable[name]) do
         if val.callback == callback and val.target == target then
             found = true
+            break
         end
     end
 
@@ -97,6 +98,7 @@ function M:postEvent(name, ...)
             for tmpi, tmpval in ipairs(self._eventTable[name]) do
                 if tmpval == handler then
                     found = true
+                    break
                 end
             end
         end
