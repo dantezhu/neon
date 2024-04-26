@@ -3,7 +3,7 @@ neon
 
 #### 一. 简介
 
-lua 类mvc framework，支持 cocos2dx-3.4
+Lua MVVM Framework，支持 cocos2dx-3.4
 
 基本模块包括: Neon, View, Events, Logger
 
@@ -21,7 +21,11 @@ lua 类mvc framework，支持 cocos2dx-3.4
 
 * View
 
-    上文提到的View
+    这里的View，实际是ViewModel，真实的View是Cocos提供的Layer。
+
+    只是在本框架中，为了使用方便，直接将ViewModel命名为了View。
+
+    ViewModel是View与Model的桥梁。
 
 * Events
 
