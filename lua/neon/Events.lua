@@ -54,6 +54,7 @@ function M:delHandler(name, callback)
             i = i + 1
         end
     end
+    -- TODO handlers为空时，删除对应的name
 end
 
 -- 通过target删除
@@ -69,6 +70,7 @@ function M:delHandlersForTarget(target)
             end
         end
     end
+    -- TODO handlers为空时，删除对应的name
 end
 
 -- 删除对应name
