@@ -1,4 +1,4 @@
-type Callback = (...args: any[]) => void;
+type Callback = (event: string, ...args: any[]) => void;
 
 // Callback的容器
 interface Handler {
@@ -8,10 +8,10 @@ interface Handler {
 
 export class Events {
     // 事件及处理函数
-    private _eventTable: {[key:string]: Handler[]};
+    private _eventTable: Map<string, Handler[]>;
 
     constructor() {
-        this._eventTable = {};
+        this._eventTable = new Map<string, Handler[]>();
     }
 
     // 添加
@@ -20,14 +20,16 @@ export class Events {
             throw new Error('target cannot be null');
         }
 
-        if (!(name in this._eventTable)) {
-            this._eventTable[name] = []
+        if (!(this._eventTable.has(name))) {
+            this._eventTable.set(name, [])
         }
+
+        let handlers = this._eventTable.get(name) || [];
 
         let found = false;
 
         // 判断是否已经存在
-        for (let handler of this._eventTable[name]) {
+        for (let handler of handlers) {
             if (handler.callback === callback && handler.target === target) {
                 found = true;
                 break;
@@ -35,7 +37,7 @@ export class Events {
         }
 
         if (!found) {
-            this._eventTable[name].push({
+            handlers.push({
                 callback: callback,
                 target: target,
             })
@@ -44,11 +46,11 @@ export class Events {
 
     // 删除
     delHandler(name: string, callback: Callback) {
-        if (!(name in this._eventTable)) {
+        if (!(this._eventTable.has(name))) {
             return;
         }
 
-        let handlers = this._eventTable[name]
+        let handlers = this._eventTable.get(name) || [];
 
         for (let i = 0; i < handlers.length; i++) {
             if (handlers[i].callback === callback) {
@@ -62,7 +64,7 @@ export class Events {
 
     // 通过target删除
     delHandlersForTarget(target: any) {
-        Object.entries(this._eventTable).forEach(([name, handlers]) => {
+        this._eventTable.forEach((handlers, name) => {
 
             for (let i = 0; i < handlers.length; i++) {
                 if (handlers[i].target === target) {
@@ -78,31 +80,31 @@ export class Events {
 
     // 删除对应name
     delHandlers(name: string) {
-        delete this._eventTable[name];
+        this._eventTable.delete(name);
     }
 
     // 清空
     clearHandlers() {
-        this._eventTable = {};
+        this._eventTable.clear()
     }
 
     // 触发事件
     emit(name: string, ...args: any[]) {
-        if (!(name in this._eventTable)) {
+        if (!(this._eventTable.has(name))) {
             return;
         }
 
         // 浅copy，避免在事件处理函数中添加或删除事件处理函数
-        let handlers = this._eventTable[name].slice();
+        let handlers = (this._eventTable.get(name) || []).slice();
 
         for (let handler of handlers) {
-            if (this._eventTable[name].indexOf(handler) === -1) {
+            if ((this._eventTable.get(name) || []).indexOf(handler) === -1) {
                 // 说明可能在过程中被移除了
                 // 如果继续调用可能会报错
                 continue;
             }
 
-            handler.callback(...args);
+            handler.callback(name, ...args);
         }
     }
 }
