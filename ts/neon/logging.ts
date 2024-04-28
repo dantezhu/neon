@@ -45,14 +45,14 @@ export class Logger {
         this._log(LogLevel.ERROR, ...args);
     }
 
-    private _formatTime(now: Date): string {
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0'); // 月份从0开始，需加1并补零
-        const day = String(now.getDate()).padStart(2, '0');
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-        const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+    private _formatTime(tm: Date): string {
+        const year = tm.getFullYear();
+        const month = String(tm.getMonth() + 1).padStart(2, '0'); // 月份从0开始，需加1并补零
+        const day = String(tm.getDate()).padStart(2, '0');
+        const hours = String(tm.getHours()).padStart(2, '0');
+        const minutes = String(tm.getMinutes()).padStart(2, '0');
+        const seconds = String(tm.getSeconds()).padStart(2, '0');
+        const milliseconds = String(tm.getMilliseconds()).padStart(3, '0');
     
         return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;
     }
