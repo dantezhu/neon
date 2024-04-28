@@ -60,10 +60,16 @@ export class Events {
                 i--; 
             }
         }
+
+        if (handlers.length === 0) {
+            this._eventTable.delete(name);
+        }
     }
 
     // 通过target删除
     delHandlersForTarget(target: any) {
+        let keysToDelete:string[] = [];
+
         this._eventTable.forEach((handlers, name) => {
 
             for (let i = 0; i < handlers.length; i++) {
@@ -75,7 +81,17 @@ export class Events {
                 }
             }
 
+            if (handlers.length === 0) {
+                keysToDelete.push(name);
+            }
+
         });
+
+        if (keysToDelete.length > 0) {
+            keysToDelete.forEach(key => {
+                this._eventTable.delete(key);
+            })
+        }
     }
 
     // 删除对应name
