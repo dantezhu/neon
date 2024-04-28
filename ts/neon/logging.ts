@@ -1,6 +1,5 @@
 export enum LogLevel {
     VERBOSE,
-    DEBUG,
     INFO,
     WARN,
     ERROR,
@@ -8,7 +7,6 @@ export enum LogLevel {
 
 const levelNameMap = new Map<LogLevel, string> ([
     [LogLevel.VERBOSE, 'VERBOSE'],
-    [LogLevel.DEBUG, 'DEBUG'],
     [LogLevel.INFO, 'INFO'],
     [LogLevel.WARN, 'WARN'],
     [LogLevel.ERROR, 'ERROR'],
@@ -27,10 +25,6 @@ export class Logger {
 
     verbose(...args: any[]) {
         this._log(LogLevel.VERBOSE, ...args);
-    }
-
-    debug(...args: any[]) {
-        this._log(LogLevel.DEBUG, ...args);
     }
 
     info(...args: any[]) {
@@ -73,9 +67,6 @@ export class Logger {
         switch(level) {
             case LogLevel.VERBOSE:
                 console.log(prefix, ...args);
-                break;
-            case LogLevel.DEBUG:
-                console.debug(prefix, ...args);
                 break;
             case LogLevel.INFO:
                 console.info(prefix, ...args);
