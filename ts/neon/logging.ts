@@ -45,14 +45,20 @@ export class Logger {
         this._log(LogLevel.ERROR, ...args);
     }
 
+    private _padStart(str: string, targetLength: number, padString: string): string {
+        const len = targetLength - str.length;
+        if (len <= 0) return str;
+        const padding = padString.repeat(Math.ceil(len / padString.length)).slice(0, len);
+        return padding + str;
+    }
     private _formatTime(tm: Date): string {
         const year = tm.getFullYear();
-        const month = String(tm.getMonth() + 1).padStart(2, '0'); // 月份从0开始，需加1并补零
-        const day = String(tm.getDate()).padStart(2, '0');
-        const hours = String(tm.getHours()).padStart(2, '0');
-        const minutes = String(tm.getMinutes()).padStart(2, '0');
-        const seconds = String(tm.getSeconds()).padStart(2, '0');
-        const milliseconds = String(tm.getMilliseconds()).padStart(3, '0');
+        const month = this._padStart(String(tm.getMonth() + 1), 2, '0'); // 月份从0开始，需加1并补零
+        const day = this._padStart(String(tm.getDate()), 2, '0');
+        const hours = this._padStart(String(tm.getHours()), 2, '0');
+        const minutes = this._padStart(String(tm.getMinutes()), 2, '0');
+        const seconds = this._padStart(String(tm.getSeconds()), 2, '0');
+        const milliseconds = this._padStart(String(tm.getMilliseconds()), 3, '0');
     
         return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;
     }
@@ -90,3 +96,5 @@ export class Logger {
     }
 
 }
+
+export const logger = new Logger();
