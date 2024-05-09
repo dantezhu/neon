@@ -21,7 +21,9 @@ Lua MVC Framework，支持 cocos2dx-3.4
 
 * View
 
-    这里的View，实际结合了View和Controller的能力。
+    这里的View，实际是Controller，真实的View是Cocos提供的Layer。
+
+    只不过Layer的能力有限，需要Controller对View做很多组装。
 
     这种方式对于小型项目，更加简单灵活。
 
