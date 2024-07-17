@@ -7,11 +7,17 @@ interface Handler {
 }
 
 export class Events {
+    // 批量处理
+    private _batch: boolean;
     // 事件及处理函数
     private _eventTable: Map<string, Handler[]>;
+    // 事件队列
+    private _eventList: { name: string; args: any[] }[];
 
-    constructor() {
+    constructor(batch: boolean = false) {
+        this._batch = batch;
         this._eventTable = new Map<string, Handler[]>();
+        this._eventList = [];
     }
 
     // 添加
@@ -106,6 +112,28 @@ export class Events {
 
     // 触发事件
     emit(name: string, ...args: any[]) {
+        // 如果批量处理，添加到事件列表中
+        if (this._batch) {
+            this._eventList.push({
+                name, args
+            });
+
+            return;
+        }
+
+        this._processEvent(name, ...args);
+    }
+
+    // 批量处理事件列表
+    processEvents() {
+        while (this._eventList.length > 0) {
+            const { name, args } = this._eventList.shift()!;
+            this._processEvent(name, ...args);
+        }
+    }
+
+    // 处理事件
+    private _processEvent(name: string, ...args: any[]) {
         if (!(this._eventTable.has(name))) {
             return;
         }
